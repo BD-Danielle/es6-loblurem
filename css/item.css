@@ -1,0 +1,311 @@
+
+/*======================此部分為方型樣式======================*/
+
+.pq_LIST_SQR{
+	width: 100%;
+	list-style: square;
+	list-style-position: outside;
+	padding:0px 0px 0px 30px;
+	box-sizing: border-box;
+}
+
+
+.pq_LIST_SQR a{
+	color:#1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_LIST_SQR li>ul{
+	width: 100%;
+	list-style: square;
+	list-style-position: outside;
+	padding:0px 0px 0px 30px;
+	box-sizing: border-box;
+}
+
+/*======================此部分為圓點樣式======================*/
+
+.pq_LIST_DISC{
+	width: 100%;
+	list-style: disc;
+	list-style-position: outside;
+	padding:0px 0px 0px 30px;
+	box-sizing: border-box;
+}
+
+.pq_LIST_DISC a{
+	color:#1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_LIST_DISC li>ul{
+	width: 100%;
+	list-style: disc;
+	list-style-position:outside;
+	padding:0px 0px 0px 27px;
+	box-sizing: border-box;
+}
+
+/*======================此部分為序號樣式======================*/
+
+.pq_LIST_NUM{
+	width: 100%;
+	list-style: decimal;
+	list-style-position: outside;
+	padding:0px 0px 0px 30px;
+	box-sizing: border-box;
+}
+
+.pq_LIST_NUM a{
+	color:#1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_LIST_NUM li>ul{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.pq_LIST_NUM li>ul>li{
+	padding: 0 0 0 30px;
+	text-indent: -32px;
+}
+
+/*======================此部分為自訂圖1樣式======================*/
+
+.pq_LIST_ICON{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.pq_LIST_ICON a{
+	color:#1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_LIST_ICON li{
+	background: transparent url(../images/icon_1.png) no-repeat;
+	background-size: 30px 30px;/*控制圖片的大小*/
+	background-position-y: 2px;
+	padding-left: 35px;
+}
+
+.pq_LIST_ICON li>ul>li{
+	background-image: none;
+	padding-left: 25px;
+	text-indent: -25px;
+}
+
+.pq_LIST_ICON li>ul>li::before{
+	content: '└ '; /*輸入想要的符號*/
+	/*font-size:1.2rem;*/ /*改變大小用font-size控制*/
+	/*color: brown;*/ /*改變顏色用color控制*/
+}
+
+.pq_LIST_ICON li ul li ul li::before{
+	content: '◆ ';
+	/*font-size:1.2rem;*/ /*改變大小用font-size控制*/
+	/*color: brown;*/ /*改變顏色用color控制*/
+}
+
+/*======================此部分為自訂圖2樣式======================*/
+
+/*自訂圖項目-第二層項目圖片樣式*/
+.pq_LIST_ICON .pq_SEC_ICON{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*設計師請在這換圖即可*/
+.pq_LIST_ICON .pq_SEC_ICON li{
+	background: transparent url(../images/icon_2.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+	text-indent: 1px;
+}
+
+.pq_LIST_ICON .pq_SEC_ICON li::before{
+	content: '';}
+
+
+/*自訂圖項目-第三層項目圖片樣式*/
+.pq_LIST_ICON .pq_THR_ICON{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*設計師請在這換圖即可*/
+.pq_LIST_ICON .pq_THR_ICON li{
+	background: transparent url(../images/icon_3.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 0.5px;
+	padding-left: 35px;
+}
+
+.pq_LIST_ICON .pq_THR_ICON li::before{
+	content: '';}
+
+/*======================自訂圖2樣式結束======================*/
+
+/*本站首頁小icon樣式*/
+.pq_SMALLNUM{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.pq_SMALLNUM a{
+	display:block;
+	color: #333333;
+	text-decoration: none;
+	white-space: nowrap;/*不自動斷行*/
+	text-overflow: ellipsis;/*出現省略符號*/
+	overflow: hidden;
+}
+
+.pq_SMALLNUM a:hover{
+	color: #1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_SMALLNUM li{
+	counter-increment: step-counter;/*給定content一個值讓::before呼叫*/
+	box-sizing: border-box;
+	margin-bottom: 5px;
+}
+
+.pq_SMALLNUM li::before{
+	display: inline-block;
+	float: left;
+	font-size: 1rem;
+	color: white;
+	width: 22px;
+	height: 22px;
+	line-height: 23px;
+	text-align: center;
+	content: counter(step-counter);/*呼應上方給定的值*/
+	background-color: #c12dda;/*調整顏色*/
+	border-radius: 3px;/*調整外框樣式*/
+	margin-right: 5px;
+}
+
+
+/*======================日韓、本站與算命首頁推薦區塊======================*/
+
+.pq_LIST_REC{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.pq_LIST_REC a{
+	display:block;
+	color: #333333;
+	text-decoration: none;
+}
+
+.pq_LIST_REC a:hover{
+	color: #1a8dd4;
+	text-decoration: underline;
+}
+
+.pq_LIST_REC li{
+	margin-bottom: 10px;
+	white-space: nowrap;/*不自動斷行*/
+	text-overflow: ellipsis;/*出現省略符號*/
+	overflow: hidden;
+	border-bottom: 1px solid #e1e1e1;
+	height: 35px;
+}
+
+.pq_LIST_REC li span{
+	display: inline-block;
+    float: left;
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    color: #FFF;
+    background-color: #d36f5b;
+    padding: 2px;
+    margin-right: 5px;
+}
+
+.pq_LIST_ICON2{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*======================此部分為自訂圖2樣式======================*/
+
+.pq_LIST_ICON2 li:nth-of-type(1){
+	background: transparent url(../images/icon_1.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+}
+
+.pq_LIST_ICON2 li:nth-of-type(2){
+	background: transparent url(../images/icon_2.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+}
+
+.pq_LIST_ICON2 li:nth-of-type(3){
+	background: transparent url(../images/icon_3.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+}
+
+.pq_LIST_ICON2 li:nth-of-type(4){
+	background: transparent url(../images/icon_4.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+}
+
+/*======================此部分為自訂圖2樣式======================*/
+
+.OUTER .O_CON_BOX{
+	width: 670px;
+	height: auto;
+	overflow: hidden;
+}
+
+.pq_LIST_ICON3{
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*======================此部分為自訂圖2樣式======================*/
+
+.pq_LIST_ICON3 li:nth-of-type(1){
+	background: transparent url(../images/icon_1.png) no-repeat;
+	background-size: 25px 25px;
+	background-position-y: -1px;
+	padding-left: 27px;
+	text-indent: 0.2px;
+}
+
+.pq_LIST_ICON3 li:nth-of-type(2){
+	background: transparent url(../images/icon_2.png) no-repeat;
+	background-size: 27px 27px;
+	background-position-y: 0px;
+	padding-left: 32px;
+	text-indent: 0.2px;
+}
+
+.pq_LIST_ICON3 li:nth-of-type(3){
+	background: transparent url(../images/icon_3.png) no-repeat;
+	background-size: 30px 30px;
+	padding-left: 32px;
+	text-indent: 0.2px;
+}
+
+.pq_LIST_ICON3 li:nth-of-type(4){
+	background: transparent url(../images/icon_4.png) no-repeat;
+	background-size: 30px 30px;
+	background-position-y: 1px;
+	padding-left: 35px;
+	text-indent: 0.2px;
+}

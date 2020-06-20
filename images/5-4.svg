@@ -1,0 +1,17 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="500px" height="80px">
+  <filter id="drop-shadow">
+
+        <-- Grab a blakc copy of the source image and blur it by 10 -->
+          <feGaussianBlur stdDeviation="3.5" result="drop-shadow"></feGaussianBlur>
+
+    </filter>
+    <text kerning="auto" font-family="Microsoft JhengHei" fill="rgb(0, 0, 0)" font-size="20px" >
+      <tspan x="3px" y="23px" font-size="20px" filter="url(#drop-shadow)" fill="#c51a1a">你猜的出內容是什麼嗎你猜的出內容你猜的出內多多多</tspan>
+      <tspan x="3px" y="48px" font-size="20px" filter="url(#drop-shadow)" fill="#000">你猜的出內容是什麼嗎你猜的出內容你猜的出內</tspan>
+      <tspan x="3px" y="73px" font-size="20px" filter="url(#drop-shadow)" fill="#000">你猜的出內容是什麼嗎你猜的出內容你猜的出內</tspan>
+    </text>
+
+</svg>

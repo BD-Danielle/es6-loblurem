@@ -1,0 +1,1378 @@
+/* CSS Document */
+@import url("https://imgs.click108.com.tw/css_2013/reset_2.css");
+
+body{-webkit-text-size-adjust:none;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	text-decoration:none;
+    font-size: 16px;}
+
+.OUTER{
+    width: 850px;
+    height: auto;
+	overflow: hidden;
+    margin: 10px auto;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;}
+
+@media screen and (max-width:767px){/*for共版看版面*/
+    .OUTER{
+    width: 90%;
+    height: auto;
+	overflow: hidden;
+    margin: 10px auto;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;}
+}
+
+.MOBILE .OUTER{/*for 手機看版面*/
+    width: 90%;}
+
+
+.BLANK{
+	height:10px;}
+.BLANK02{
+	height:15px;}
+.BLANK03{
+	height:20px;}
+
+/*文字顏色範例區*/
+.pq_LINK1{
+	color:#1a8dd4;}
+
+.pq_BLACK{
+	color:#000000;}
+
+.pq_GRAY1{
+	color:#333333;}
+
+.pq_GRAY2{
+	color:#666666;}
+
+.pq_GRAY3{
+	color:#CCCCCC;}
+
+.pq_WHITE{
+	color: #FFFFFF;}
+
+.pq_RED1{
+	color:red;}
+
+.pq_RED2{
+	color:#f44154;}
+
+.pq_RED3{
+	color:#d80000;}
+
+.pq_RED4{
+	color:#8f0202;}
+
+.pq_RED5{
+	color:#5c0000;}
+
+.pq_BROWN1{
+	color:#a83700;
+}
+.pq_BROWN2{
+	color:#b37300;
+}
+.pq_PINK1{
+	color:#f13e96;
+}
+
+.pq_PINK2{
+	color: #FF1493;
+}
+
+.pq_PINK3{
+	color: #ee0070;
+}
+
+.pq_PINK4{
+	color: #a6004e;
+}
+
+.pq_PINK5{
+	color: #ff98a8;
+}
+
+.pq_ORANGE1{
+	color:#ff3c00;
+}
+
+.pq_ORANGE2{
+	color: #ff6000;
+}
+
+.pq_ORANGE3{
+	color: #ff8a00;
+}
+
+.pq_YELLOW1{
+	color:yellow;
+}
+
+.pq_YELLOW2{
+	color:#ffffad;
+}
+
+ .pq_GREEN1{
+	color:#00a13a;
+}
+
+.pq_GREEN2{
+	color:#096300;
+}
+
+.pq_GREEN3{
+	color:#6b8e23;
+}
+
+.pq_GREEN4{
+	color:#00d5d2;
+}
+
+.pq_GREEN5{
+	color:#008b8b;
+}
+
+.pq_BLUE1{
+	color:#0088ff;
+}
+
+.pq_BLUE2{
+	color:#0088ff;
+}
+
+.pq_BLUE3{
+	color:#012ba4;
+}
+
+.pq_PURPLE1{
+	color:#6800c6;
+}
+
+.pq_PURPLE2{
+	color:#8600ff;
+}
+
+.pq_PURPLE3{
+	color:#c12dda;
+}
+
+
+/*加底色範例*/
+.pq_BG_PINK1{
+	background-color:#ffe3e3;}
+ .pq_BG_YELLOW1{
+	background-color:#ffffad;}
+ .pq_BG_BLUE1{
+	background-color:#d9f7ff;}
+ .pq_BG_GRAY1{
+ 	background-color: #EDEDED;}
+
+ /*區塊樣式線條與圓角*/
+ .pq_RADIUS_S{
+ 	border-radius: 5px;}
+ .pq_RADIUS_M{
+ 	border-radius: 10px;}
+ .pq_RADIUS_L{
+ 	border-radius: 25px;}
+ .pq_RADIUS_XL{
+ 	border-radius: 40px;}
+
+ .pq_BORDER_W1{
+ 	border-width: 1px;}
+ .pq_BORDER_W2{
+ 	border-width: 2px;}
+ .pq_BORDER_W3{
+ 	border-width: 3px;}
+
+
+ .pq_BORDER_SOLI{
+ 	border-style: solid;}
+ .pq_BORDER_DASH{
+ 	border-style: dashed;}
+ .pq_BORDER_DOTT{
+ 	border-style: dotted;}
+	
+
+/*文字樣式區-裝飾*/
+.pq_B{font-weight: bold;/*粗體*/}
+.pq_I{font-style: italic;/*斜體*/}
+.pq_L{text-decoration: underline;/*底線-LINK用*/}
+.pq_N{font-style: normal; text-decoration: none;/*取消所有樣式*/}
+
+/*文字樣式區-大標*/
+.pq_TIT_EX{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 2.2rem;
+	line-height: 3.5rem;
+    text-decoration: none;
+}
+
+.pq_TIT1{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 2rem;
+	line-height: 3.2rem;
+    text-decoration: none;
+}
+
+
+.pq_TIT2{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.8rem;
+	line-height: 2.7rem;
+    text-decoration: none;
+}
+
+.pq_TIT3{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+    text-decoration: none;
+}
+
+/*文字樣式區-次標*/
+.pq_ADT1{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.5rem;
+	line-height: 2.2rem;
+    text-decoration: none;
+}
+
+.pq_ADT2{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.4rem;
+	line-height: 2.2rem;
+    text-decoration: none;
+}
+
+.pq_ADT3{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.3rem;
+	line-height: 2rem;
+    text-decoration: none;
+}
+
+/*文字樣式區-內文相關樣式*/
+.pq_TXT1{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.2rem;
+	line-height: 2.2rem;
+    text-decoration: none;
+}
+
+.pq_TXT2{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.2rem;
+	line-height: 2rem;
+    text-decoration: none;
+}
+
+
+.pq_TXT3{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1.1rem;
+	line-height: 1.8rem;
+    text-decoration: none;
+}
+
+.pq_TXT4{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1rem;
+	line-height: 1.6rem;
+    text-decoration: none;
+}
+
+.pq_TXT5{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 1rem;
+	line-height: 1.3rem;
+    text-decoration: none;
+}
+
+.pq_TXT6{
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	font-size: 0.9rem;
+	line-height: 1.6rem;
+    text-decoration: none;
+}
+
+/*文字樣式區-特殊字型標楷題*/
+.pq_TSP1{
+	font-family: "標楷體", "新細明體",  Helvetica, Arial;
+	font-size: 5rem;
+    text-decoration: none;
+}
+.pq_TSP2{
+	font-family: "標楷體", "新細明體",  Helvetica, Arial;
+	font-size: 2.5rem;
+	line-height: 4rem;
+    text-decoration: none;
+}
+.pq_TSP3{
+	font-family: "標楷體", "新細明體",  Helvetica, Arial;
+	font-size: 2rem;
+	line-height: 3.2rem;
+    text-decoration: none;
+}
+
+/*=======區塊欄位區========*/
+/*使用者資料欄位*/
+.PC ul.pq_INFOR1 { width:100%; margin:5px auto; clear: both; overflow: hidden;}
+.PC ul.pq_INFOR1 li{display:inline-block;float: left;text-align:center;padding: 0 2%;}
+
+.PC ul.pq_INFOR2 { width:100%; margin:5px auto; clear: both; overflow: hidden;}
+.PC ul.pq_INFOR2 li{display:inline-block;float: left;text-align:center;padding: 0 2%;}
+.PC ul.pq_INFOR2 li:nth-child(2){margin-top: 5px;}
+.PC ul.pq_INFOR2 .GENDER{ 
+	display:inline-block;
+	width:30px;
+	height:30px;
+	margin:0 auto;
+	margin-bottom:-8px;}
+.PC ul.pq_INFOR2 .GENDER img{ 
+	display:block;
+	width:100%;
+	height:auto;
+	margin:0 auto;}
+
+/*使用者資料欄位-手機版*/
+.MOBILE ul.pq_INFOR1 { width:100%; margin:5px auto; clear: both; overflow: hidden;}
+.MOBILE ul.pq_INFOR1 li{text-align:center;padding: 0 2%;}
+.MOBILE ul.pq_INFOR1 li:nth-child(2){display: none;}
+
+.MOBILE ul.pq_INFOR2 { width:100%; margin:5px auto; clear: both; overflow: hidden;}
+.MOBILE ul.pq_INFOR2 li{text-align:center;padding: 0 2%;}
+.MOBILE ul.pq_INFOR2 li:nth-child(2){display: none;}
+.MOBILE ul.pq_INFOR2 .GENDER{ 
+	display:inline-block;
+	width:30px;
+	height:30px;
+	margin:0 auto;
+	margin-bottom:-8px;}
+.MOBILE ul.pq_INFOR2 .GENDER img{ 
+	display:block;
+	width:100%;
+	height:auto;
+	margin:0 auto;}
+
+/*INPUT中式服務提供分析收合*/
+.PC .pq_INPUT_BOX1{
+    width:670px;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+    margin: 15px auto;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.PC .pq_INPUT_BOX1 .pq_INBAR{
+    width:100%;
+	height:66px;
+	background-image:url(../images/input_bar.jpg);
+	background-repeat:no-repeat;
+	text-align:center;
+	font-size: 1.6rem;
+	line-height:66px;
+	color:#FFF;
+	font-weight:bold;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	}
+.PC .pq_INPUT_BOX1 .pq_DR_DOWN a{display:none;}
+.PC .pq_INPUT_BOX1 .pq_INBOX{
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+	padding:2% 4%;
+	background-color: #fdf9fe;
+	box-shadow: inset 0px 0px 50px rgba(227,153,219,1);
+	-webkit-box-shadow: inset 0px 0px 50px rgba(227,153,219,1);
+	-moz-box-shadow: inset 0px 0px 50px rgba(227,153,219,1);
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+/*INPUT中式服務提供分析收合-手機版*/
+.MOBILE .pq_INPUT_BOX1{
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+    margin: 15px auto;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.MOBILE .pq_INPUT_BOX1 .pq_INBAR{
+    width:100%;
+	background-color:#a43d98;
+	height:50px;
+	margin:10px auto 0 auto;
+	font-size:1.4rem;
+	line-height:50px;
+	color:#fff;
+	font-weight:bold;
+	text-indent:15px;
+	position:relative;
+	font-weight:bold;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	}
+	@media screen and (max-width:320px){/*for i5 SE*/
+		.MOBILE .pq_INPUT_BOX1 .pq_INBAR{
+			text-indent:6px;
+			font-size:1.2rem;}
+	}
+.MOBILE .pq_INPUT_BOX1 .pq_DR_DOWN a{
+	position:absolute;
+	display:block;
+	width:30px;
+	height:30px;
+	background-size:20px 20px;
+	background-repeat:no-repeat;
+	right:0px;
+	top:15px;}
+.MOBILE .pq_INPUT_BOX1 .pq_INBOX{
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+	margin:0 auto;
+	padding:2% 4%;
+	background-color: #fdf9fe;
+	box-shadow: inset 0px 0px 25px rgba(227,153,219,1);
+	-webkit-box-shadow: inset 0px 0px 25px rgba(227,153,219,1);
+	-moz-box-shadow: inset 0px 0px 25px rgba(227,153,219,1);
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+/*INPUT中式配圖介紹*/
+.PC .pq_CON_BOX1{
+	width:670px;
+	height:auto;
+	overflow:hidden;
+	margin:10px auto;
+	border: 1px solid #f0cfff;
+	-webkit-box-sizing:border-box;}
+
+.PC .pq_CON_BOX1 .pq_CON_BOX_BAR{
+	width:100%;
+	height:60px;
+	margin:0 auto;
+	background-color: #f6e3ff;
+	-webkit-box-sizing:border-box;}
+
+.PC .pq_CON_BOX1 .pq_CON_BOX_BAR p{
+	line-height:60px;
+	color:#7e00b9;
+	font-weight:bold;
+	text-align:center;
+	}
+
+.PC .pq_CON_BOX1 img{display:block; width:100%;margin:0 auto;}
+.PC .pq_CON_BOX1 .BOX_INSET{/*內縮*/
+	width: 90%; 
+	height: auto;
+	clear:both;
+	overflow: hidden;
+	margin:10px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;}
+.PC .pq_CON_BOX1 .LISTIMG{/*配圖*/
+	display:inline-block;
+	width:34%;
+	margin-right: 2%;
+	vertical-align: top;
+	}
+
+.PC .pq_CON_BOX1 .LISTBOX{
+	display:inline-block;
+	width:62%;
+	height:auto;
+	overflow:hidden;}
+
+/*INPUT中式配圖介紹-手機版*/
+.MOBILE .pq_CON_BOX1{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	margin:10px auto;
+	border: 1px solid #f0cfff;
+	-webkit-box-sizing:border-box;}
+
+.MOBILE .pq_CON_BOX1 .pq_CON_BOX_BAR{
+	width:100%;
+	height:60px;
+	margin:0 auto;
+	background-color: #f6e3ff;
+	-webkit-box-sizing:border-box;}
+
+.MOBILE .pq_CON_BOX1 .pq_CON_BOX_BAR p{
+	line-height:60px;
+	color:#7e00b9;
+	font-weight:bold;
+	text-align:center;
+	}
+.MOBILE .pq_CON_BOX1 img{display:block; width:100%;margin:0 auto;}
+.MOBILE .pq_CON_BOX1 .BOX_INSET{/*內縮*/
+	width: 95%; 
+	height: auto;
+	clear:both;
+	overflow: hidden;
+	margin:10px auto;}
+.MOBILE .pq_CON_BOX1 .LISTIMG{/*配圖*/
+	width:80%;
+	margin: 0 auto 10px auto;
+	}
+
+.MOBILE .pq_CON_BOX1 .LISTBOX{
+	width:auto;
+	height:auto;
+	overflow:hidden;}
+
+/*INPUT西式服務提供分析收合*/
+.PC .pq_INPUT_BOX2{
+    width:670px;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+    margin: 15px auto 0 auto;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.PC .pq_INPUT_BOX2 .pq_INBAR{
+    width:100%;
+	height:94px;
+	background-image:url(../images/input_bar2.png);
+	background-repeat: no-repeat;
+	text-align:center;
+	line-height:94px;
+	font-weight:bold;
+    border-left: 2px solid #b5984a;
+	border-right: 2px solid #b5984a;
+     box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	}
+.PC .pq_INPUT_BOX2 .pq_INBOX{
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+	border-left: 2px solid #b5984a;
+	border-right: 2px solid #b5984a;
+	border-bottom: 2px solid #b5984a;
+    padding: 2% 4%;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+/*INPUT西式服務提供分析收合-手機版*/
+.MOBILE .pq_INPUT_BOX2{
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+    margin: 15px auto 0 auto;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.MOBILE .pq_INPUT_BOX2 .pq_INBAR{
+    width:100%;
+	height:60px;
+	margin:0 auto;
+	background-position:center;
+	border-left: 1px solid #b5984a;
+	border-right: 1px solid #b5984a;
+	background-size:cover;
+	background-image:url(../images/input_bar2.png);
+	background-repeat: no-repeat;
+	text-align:center;
+	line-height:94px;
+	font-weight:bold;
+     box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	font-size:1.3em;
+	line-height:60px;
+	color:#191919;
+	}
+
+.MOBILE .pq_INPUT_BOX2 .pq_INBOX{
+	width:100%;
+	margin: 0 auto;
+	height:auto;
+	overflow:hidden;
+    padding: 10px 0;
+}
+
+/*INPUT西式配圖介紹*/
+.PC .pq_CON_BOX2{
+	width:670px;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;
+	border-left: 2px solid #b5984a;
+	border-right: 2px solid #b5984a;
+	border-bottom: 2px solid #b5984a;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;}
+
+.PC .pq_CON_BOX2 .pq_CON_BOX_BAR{
+	width:100%;
+	height:94px;
+	background-image:url(../images/input_bar3.png);
+	background-repeat: no-repeat;
+	text-align:center;
+	line-height:94px;
+	font-weight:bold;
+     box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;}
+
+.PC .pq_CON_BOX2 img{display:block; width:100%;margin:0 auto;}
+.PC .pq_CON_BOX2 .BOX_INSET{/*內縮*/
+	width: 90%; 
+	height: auto;
+	clear:both;
+	overflow: hidden; 
+	margin:10px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.PC .pq_CON_BOX2 .LISTIMG{/*配圖*/
+	display:inline-block;
+	width:35%;
+	margin-right: 2%;
+	margin-top: 12px;
+	vertical-align: top;
+	}
+	.PC .pq_CON_BOX2 .LISTIMG img{
+	display: inline-block;
+	width: 47%; 
+	height: auto; 
+	margin-right: 3%;
+	}
+
+.PC .pq_CON_BOX2 .LISTBOX{
+	display:inline-block;
+	width:62%;
+	height:auto;
+	overflow:hidden;}
+
+/*INPUT西式配圖介紹-手機版*/
+.MOBILE .pq_CON_BOX2{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	clear:both;
+    margin: 15px auto 0 auto;
+    box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;}
+
+.MOBILE .pq_CON_BOX2 .pq_CON_BOX_BAR{
+	width:100%;
+	height:60px;
+	margin:0 auto;
+	background-position:center;
+	border-left: 1px solid #b5984a;
+	border-right: 1px solid #b5984a;
+	background-size:cover;
+	background-image:url(../images/input_bar3.png);
+	background-repeat: no-repeat;
+	text-align:center;
+	line-height:94px;
+	font-weight:bold;
+     box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	font-size:1.3em;
+	line-height:60px;
+	color:#191919;}
+
+.MOBILE .pq_CON_BOX2 img{display:block; width:100%;margin:0 auto;}
+.MOBILE .pq_CON_BOX2 .BOX_INSET{/*內縮*/
+	width: 98%; 
+	margin: 15px auto 0 auto; }
+.MOBILE .pq_CON_BOX2 .LISTIMG{/*配圖*/
+	width:80%;
+	margin: 0 auto;
+	}
+	.MOBILE .pq_CON_BOX2 .LISTIMG img{
+	width: 46%; 
+	height: auto; 
+	display: inline-block;
+	margin-right: 8%;
+	}
+	.MOBILE .pq_CON_BOX2 .LISTIMG img:last-child{
+		width: 46%; 
+		height: auto; 
+		display: inline-block;
+		margin-right: 0;}
+
+.MOBILE .pq_CON_BOX2 .LISTBOX{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	clear: both;
+	padding: 10px 2px;
+	color:#333;}
+
+/*RESULT 內文單欄區*/
+.PC .pq_RECOM1{/*純框線款*/
+    width:670px;
+	height:auto;
+	overflow:hidden;
+	border:3px solid #999;
+	margin:15px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.PC .pq_RECOM1 .pq_RETOP{
+    width:100%;
+    height: auto;
+    overflow: hidden;
+	border-bottom:3px solid #999;
+}
+.PC .pq_RETOP img{clear:both;display:block;width:100%; height: auto;}
+
+.PC .pq_RECOM2{/*背景框款*/
+    width:670px;
+	height:auto;
+	overflow:hidden;
+	margin:15px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.PC .pq_RECOM2 .pq_REBG{
+    width:100%;
+    height: auto;
+	overflow: hidden;
+	background-repeat: repeat-y;
+}
+
+.pq_RECOM_BOX{/*單欄*/
+	width:93%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;
+	padding:10px 0;}
+
+/*RESULT 內文單欄區-手機版*/
+.MOBILE .pq_RECOM1{/*純框線款*/
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	border:2px solid #999;
+	margin:15px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.MOBILE .pq_RECOM1 .pq_RETOP{
+    width:100%;
+    height: auto;
+    overflow: hidden;
+	border-bottom:2px solid #999;
+}
+.MOBILE .pq_RETOP img{clear:both;display:block;width:100%; height: auto;}
+
+.MOBILE  .pq_RECOM2{/*背景框款*/
+    width:100%;
+	height:auto;
+	overflow:hidden;
+	margin:15px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.MOBILE  .pq_RECOM2 .pq_REBG{
+    width:100%;
+    height: auto;
+	overflow: hidden;
+	background-repeat: repeat-y;
+	background-size: 100% auto;
+}
+
+/*RESULT 內文雙欄區*/
+.PC .pq_TWO_COM{
+	width: 98%;
+	height: auto;
+	overflow: hidden;
+	margin: 10px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;	}
+
+.PC .pq_TWO_COM .pq_REPIC{
+	display: inline-block;
+	width:34%;
+	height: auto;
+	margin-right: 4%;
+}
+.PC .pq_TWO_COM .pq_REPIC img{
+	width: 100%; 
+	height: auto;
+	margin:0 auto;}
+.PC .pq_TWO_COM .pq_RETEXT{
+	display: inline-block;
+	width:60%;
+	height:auto;
+	overflow:hidden;
+	vertical-align:top;}
+
+.PC .pq_TAROT_COM{/*RESULT 塔羅牌雙欄區*/
+	width: 98%;
+	height: auto;
+	overflow: hidden;
+	margin: 10px auto;}
+	
+.PC .pq_TAROT_COM li{ display:inline-block;}
+.PC .pq_TAROT_COM li.PH_CARD{
+	display:inline-block;
+	float: left;
+	width:200px;
+	height:329px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size: cover;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	text-indent:-9999px;
+    border: 1px solid #d3dfac;}
+	
+.PC .pq_TAROT_COM li.CARD_TEXT{
+	display:inline-block;
+	width:380px; 
+	height:auto; 
+	overflow:hidden;
+	margin-left:25px;
+	padding-top:10px;}
+
+.PC .pq_TAROT_COM .CARD_CION_BG{
+	width:auto;
+	height:60px;
+	margin:0 auto;
+	margin-bottom:17px;
+	}
+.PC .pq_TAROT_COM .CARD_CION{
+	display:inline-block;
+	width:66px;
+	height:66px;
+	background-size:66px 66px;
+	margin-bottom:-18px;
+	background-position:center right;
+	background-repeat:no-repeat;
+	margin-right:3px;
+	}
+.PC .pq_TAROT_COM .CARD_NAME{
+	display:inline-block;
+	height:70px;}
+
+/*RESULT 內文雙欄區-手機版*/
+.MOBILE .pq_TWO_COM{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin: 10px auto;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;	}
+
+.MOBILE .pq_TWO_COM .pq_REPIC{
+	width:70%;
+	height: auto;
+	margin:0 auto;
+	}
+.MOBILE .pq_TWO_COM .pq_REPIC img{
+	width: 100%; 
+	height: auto;
+	margin:0 auto;}
+.MOBILE .pq_TWO_COM .pq_RETEXT{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	text-align: left;}
+	.MOBILE .pq_TWO_COM .pq_RETEXT .pq_TXT2{text-align: center;}
+
+.MOBILE .pq_TAROT_COM{/*RESULT 塔羅牌雙欄區*/
+	width: 98%;
+	height: auto;
+	overflow: hidden;
+	margin: 10px auto;}
+	
+.MOBILE .pq_TAROT_COM li.PH_CARD{
+	width:50%;
+	height:0;
+	padding-bottom:80%;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size: cover;
+	margin:0 auto;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	text-indent:-9999px;
+    border: 1px solid #d3dfac;}
+	
+.MOBILE .pq_TAROT_COM li.CARD_TEXT{
+	width:100%; 
+	height:auto; 
+	overflow:hidden;
+	padding-top:10px;
+	text-align: left;}
+	.MOBILE .pq_TAROT_COM li.CARD_TEXT p.pq_TXT2{text-align: center;}
+
+.MOBILE .pq_TAROT_COM .CARD_CION_BG{
+	width:auto;
+	height:60px;
+	margin:0 auto;
+	text-align:center;
+	}
+.MOBILE .pq_TAROT_COM .CARD_CION{
+	display:inline-block;
+	width:50px;
+	height:50px;
+	background-size:50px 50px;
+	margin-bottom:-20px;
+	background-position:center right;
+	background-repeat:no-repeat;
+	margin-right:3px;
+	}
+.MOBILE .pq_TAROT_COM .CARD_NAME{
+	height:60px;
+	text-align:center;}
+	.MOBILE .pq_TAROT_COM .CARD_NAME b{vertical-align:middle;}
+
+
+/*FREE 免費頁模糊字*/
+.pq_SAMPLE{
+	width:100%;
+	height:auto;
+	position:relative;
+	margin:3px auto;
+	background-image:url(../images/fuzzy.png);
+	}
+.pq_SAMPLE02{
+	width:213px;
+	height:30px;
+	margin: 10px 0;
+	}
+.MOBILE .pq_SAMPLE02{
+	width:213px;
+	height:30px;
+	margin: 10px auto;
+	}
+
+/*RESULT 捲軸*/
+.PC .pq_BIGWORD1{
+	width:510px;
+	height: 136px;
+	margin: 0px auto;
+    padding-top: 3px;
+	background-repeat: no-repeat;
+	background-position: center center;}
+.PC .pq_BIGWORD1 ul{
+	display: block;
+	margin: 15px auto;
+	width: 430px;
+	height: 100px;
+	background-color: #fffde2;
+	border: 2px solid #fffde2;}
+.PC .pq_BIGWORD1 ul li:nth-child(1){
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	font-size: 1.4rem;
+	line-height: 2.24rem;
+	color: #fff;
+    font-weight: bold;
+	text-align: center;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;}
+.PC .pq_BIGWORD1 ul li:nth-child(2){
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	font-family:"標楷體", "微軟正黑體", "Microsoft JhengHei";
+	font-size: 2.5rem;
+	line-height:4rem;
+	color: #000;
+	font-weight: bold;
+	text-align: center;}
+.PC .pq_BIGWORD1 ul li img{ 
+    display: inline-block;
+    width: 50%;
+    height: auto; 
+	vertical-align:middle;}
+
+.PC .pq_BIGWORD2{
+	width:627px;
+	height: 172px;
+	margin: 0px auto;
+    padding-top: 3px;
+	background-repeat: no-repeat;}
+
+.PC .pq_BIGWORD2 ul li:nth-child(1){
+	width:45%;
+	font-size:1.4rem;
+	padding: 2px;
+	color:#fff; 
+	background-color:#931a14; 
+	margin:16px auto;
+	text-align: center;
+	border-radius: 25px;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+	}
+.PC .pq_BIGWORD2 ul li:nth-child(2){
+	width:90%;
+	font-size:3rem;
+	line-height: 4.2rem;
+	font-family: "標楷體", "微軟正黑體", "Microsoft JhengHei";
+	color:#000;
+	font-weight: bold;
+	text-align: center;
+	margin: 14px auto 0 auto;}
+.PC .pq_BIGWORD2 ul li img{ 
+    display: inline-block;
+    width: 50%;
+    height: auto; 
+	vertical-align:middle;}
+
+/*RESULT 捲軸-手機版*/
+.MOBILE .pq_BIGWORD1{
+	width:100%;
+	height:0;
+    padding-bottom: 26.666%;
+	background-repeat: no-repeat;
+	background-size: cover;
+    margin: 0 auto;
+    position: relative;
+	background-position: center center;}
+.MOBILE .pq_BIGWORD1 ul{
+	display: block;
+    position: absolute;
+    top: 11%;
+    left: 9%;
+	width: 82%;
+	height: 76%;
+	background-color: #fffde2;
+    border: 1px solid #fffde2;}
+.MOBILE .pq_BIGWORD1 ul li:nth-child(1){
+	width: 100%;
+	height: auto;
+	font-size: 5vw;
+	line-height: 1.6em;
+	color: #fff;
+    font-weight: bold;
+	text-align: center;}
+.MOBILE .pq_BIGWORD1 ul li:nth-child(2){
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	font-size: 7vw;
+	line-height: 1.6em;
+	color: #000;
+	font-weight: bold;
+	text-align: center;}
+.MOBILE .pq_BIGWORD1 ul li img{ 
+    display: inline-block;
+    width: 50%;
+    height: auto; 
+	vertical-align:middle;}
+
+.MOBILE .pq_BIGWORD2{
+	width:100%;
+	height:0;
+	margin:0px auto;
+	background-size:cover;
+	background-repeat:no-repeat;
+	padding-bottom:24.4322169059%;
+	background-position:top center;
+	text-align:center;	
+	font-weight:bold;
+	padding-top:3%;
+}
+.MOBILE .pq_BIGWORD2 ul li:nth-child(1){
+	width:45%;
+	font-size:4vw;
+	line-height: 5vw;
+	padding: 2px;
+	color:#fff; 
+	background-color:#931a14; 
+	margin:0px auto;
+	text-align: center;
+	border-radius: 25px;
+	}
+.MOBILE .pq_BIGWORD2 ul li:nth-child(2){
+	width:100%;
+	font-size:8vw;
+	line-height: 13vw;
+	color:#000;
+	font-weight: bold;
+	text-align: center;}
+.MOBILE .pq_BIGWORD2 ul li img{ 
+    display: inline-block;
+    width: 50%;
+    height: auto; 
+	vertical-align:middle;}
+
+/*RESULT 中西日曆*/
+.PC .pq_CALENDAR1{
+	width:92%;
+	height:auto;
+	overflow:hidden;
+	margin:10px auto;} 
+
+.PC .pq_CALENDAR1 .CHARTBG{/*月曆圖*/
+	display:inline-block;
+	float:left;
+	width:170px;
+	height:163px;
+	background-image:url(../images/calendar01.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin:9px;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+}
+
+.PC .pq_CALENDAR1 .YEAR{/*年份*/
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	color:#fff;
+	font-size:1.3em;
+	font-weight:bold;
+	margin-top:6px;} 
+.PC .pq_CALENDAR1 .TIME{
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	font-weight:bold;
+	margin-top:20px;}
+	.PC .pq_CALENDAR1 .TIME .MONTH{
+	font-size:1.9em;
+	font-weight:bold;
+	color:#CC0000;
+	line-height:1.8em;}
+	.PC .pq_CALENDAR1 .TIME .DATE{
+		font-size:1em;
+		color:#333;
+		line-height:1.2em;}
+
+.PC .pq_CALENDAR2{
+	width:96%;
+	height:auto;
+	overflow:hidden;
+	margin:10px auto;} 
+.PC .pq_CALENDAR2 .CHARTBG{/*月曆圖*/
+	display:inline-block;
+	width:180px;
+	height:164px;
+	background-image:url(../images/calendar02.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin:6px;
+	font-family: "微軟正黑體", "Microsoft JhengHei", "sans-serif", Helvetica, Arial;
+}
+
+.PC .pq_CALENDAR2 .YEAR{
+	text-align:center;
+	font-size:1.8rem;
+	color:#ffffad;
+	font-weight:bold;
+	padding-top: 18px;} 
+.PC .pq_CALENDAR2 .TIME{
+	text-align:center;
+	font-weight:bold;
+	font-size:4.2rem;
+	color:#d50000;
+	letter-spacing:-3px;}
+
+.PC .pq_CALENDAR3{
+	margin:0 auto;
+	width: 580px;
+	height: auto;
+	overflow: hidden;}
+	.pq_CALENDAR3 img{display:block; width: 100%; height: auto;}
+
+.PC .pq_CALENDAR3 ul{
+	width: 100%;
+	padding: 2%;
+	height: auto;
+	overflow: hidden;
+	clear: both;
+	background-repeat: repeat-y;
+	}
+	
+.PC .pq_CALENDAR3 ul li{
+	display:inline-block;
+	width: 32%;
+	padding: 1% 1%;
+	text-align: center;
+	border-right: 1px dashed #906510;}
+	.PC .pq_CALENDAR3 ul li:last-child{border-right:none; padding-right:0;}
+	.PC .pq_CALENDAR3 ul li{width: 31%; padding:1% 0%;}
+
+.PC .pq_CALENDAR4{
+	margin:0 auto;
+	width: 580px;
+	height: auto;
+	overflow: hidden;}
+	.pq_CALENDAR4 img{display:block; width: 100%; height: auto;}
+
+.PC .pq_CALENDAR4 ul{
+	width: 100%;
+	padding:0 2%;
+	height: auto;
+	overflow: hidden;
+	clear: both;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	}
+	
+.PC .pq_CALENDAR4 ul li{
+	width: 90%;
+    padding: 8px 0;
+    margin: 0 auto;
+	text-align: left;
+	border-bottom: 1px dashed #ffafbe;}
+	.PC .pq_CALENDAR4 ul li:last-child{border-bottom:none; padding-right:0;}
+	.PC .pq_CALENDAR4 ul li span{margin-left: 15px;}
+
+/*RESULT 中西日曆-手機版*/
+.MOBILE .pq_CALENDAR1{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;} 
+
+.MOBILE .pq_CALENDAR1 .CHARTBG{/*月曆圖*/
+	width:170px;
+	height:163px;
+	background-image:url(../images/calendar01.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin:10px auto;}
+
+.MOBILE .pq_CALENDAR1 .YEAR{/*年份*/
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	color:#fff;
+	font-size:1.3em;
+	font-weight:bold;
+	padding-top: 6px;} 
+.MOBILE .pq_CALENDAR1 .TIME{
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	font-weight:bold;
+	margin-top:20px;}
+	.MOBILE .pq_CALENDAR1 .TIME .MONTH{
+	font-size:1.9em;
+	font-weight:bold;
+	color:#CC0000;
+	line-height:1.8em;}
+	.MOBILE .pq_CALENDAR1 .TIME .DATE{
+		font-size:1em;
+		color:#333;
+		line-height:1.2em;}
+.MOBILE .pq_CALENDAR2{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;} 
+.MOBILE .pq_CALENDAR2 .CHARTBG{/*月曆圖*/
+	width:180px;
+	height:164px;
+	background-image:url(../images/calendar02.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin:10px auto;}
+
+.MOBILE .pq_CALENDAR2 .YEAR{
+	text-align:center;
+	font-size:1.8rem;
+	color:#ffffad;
+	font-weight:bold;
+	padding-top: 18px;} 
+.MOBILE .pq_CALENDAR2 .TIME{
+	text-align:center;
+	font-weight:bold;
+	font-size:4.2rem;
+	color:#d50000;
+	letter-spacing:-3px;}
+
+.MOBILE .pq_CALENDAR3{
+	margin:0 auto;
+	width: 100%;
+	height: auto;
+	overflow: hidden;}
+
+.MOBILE .pq_CALENDAR3 ul{
+	width: 100%;
+	padding:0 3%;
+	height: auto;
+	overflow: hidden;
+	clear: both;
+	background-size:100% auto;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	}
+	
+.MOBILE .pq_CALENDAR3 ul li{
+	display: block;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	clear: both;
+	border-bottom: 1px dashed #906510;}
+	.MOBILE .pq_CALENDAR3 ul li:last-child{border-bottom:none;}
+
+.MOBILE .pq_CALENDAR4{
+	margin:10px auto 0 auto;
+	width: 100%;
+	height: auto;
+	overflow: hidden;}
+
+.MOBILE .pq_CALENDAR4 ul{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	clear: both;
+	background-image:url(../images/month_bg_love.jpg);
+	background-size:100% auto;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	}
+	
+.MOBILE .pq_CALENDAR4 ul li{
+	display: block;
+	width: 90%;
+    margin: 5px auto;
+	text-align: center;
+	border-bottom: 1px dashed #ffafbe;}
+	.MOBILE .pq_CALENDAR4 ul li:last-child{border-bottom:none; padding-right:0;}
+	.MOBILE .pq_CALENDAR4 ul li span{display: block; }

@@ -1,0 +1,1089 @@
+body{
+	-webkit-text-size-adjust:none;
+	text-decoration:none;
+	font-family: "微軟正黑體", "新細明體", "細明體",Arial, Helvetica, sans-serif;
+	background-color:#33035f;
+	}
+
+/*共用間距*/
+#it219 .BLANK{ width:100%; height:20px; clear: both;}	
+#it219 .BLANK02{ width:100%; height:25px; clear: both;}	
+#it219 .BLANK03{ width:100%; height:10px; clear: both;}	
+
+/*==============桌機版================桌機版==============桌機版=============================================*/
+/*PC表頭尾*/	
+.PC .PC_LOGIN, .PC .FOOT_PC{ width:100%; display:block;}
+/*PC表頭尾*/
+
+/*消失區*/
+.PC #float_icon, .PC #header, .PC .CHANG, .PC .FOOT_MOBILE{ display:none;}		
+
+/*框架區*/
+.PC #it219{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	background-image:url(../images/bg.jpg);
+	background-repeat:no-repeat;
+	background-position:top center;
+	background-attachment: fixed;
+	-webkit-box-sizing:border-box;
+	}
+.PC #it219 .FRAME{width:100%; height:auto; overflow:hidden; margin:0 auto;}
+/*框架區尾*/
+
+/*輸入頁表頭區*/
+.PC #it219 .IP_FRAME{
+	width:750px;
+	height:690px; 
+	overflow:hidden; 
+	margin:0 auto;
+	background-image:url(../images/input_bg.png);
+	background-position:bottom center;
+	background-repeat:no-repeat;
+	position: relative;
+	}
+.PC #it219 .IP_TOP{
+	width:750px;
+	height:auto;
+	overflow: hidden;
+	margin:0 auto;
+	}
+	
+.PC #it219 .IP_TOP h1{
+	width:750px;
+	height:252px;
+	margin:5px auto;
+	background:url(../images/input_top_title.png) no-repeat center;
+	text-indent:-9999px;}
+	
+.PC #it219 .IP_TOP .ANIMAX{/*盧恩動畫*/
+	width:350px;
+	height:350px;
+	position: absolute;
+	background-image: url(../images/animax.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	top: 37%;
+	left: 26%;
+	-webkit-animation: anirune 30s infinite ease-in-out;
+	-moz-animation: anirune 30s infinite ease-in-out;
+	animation: anirune 30s infinite ease-in-out;
+}
+@-webkit-keyframes anirune {
+	0% { opacity: 0.3; -webkit-transform: rotate(0deg);}
+	10% { opacity: 1;}
+	15% { opacity: 0.3;}
+	20% { opacity: 1;}
+	25% { opacity: 0.3;}
+	30% { opacity: 1;}
+	35% { opacity: 0.3;}
+	40% { opacity: 1}
+	45% { opacity: 0.3;}
+	50% { opacity: 1;}
+	55% { opacity: 0.3;}
+	60% { opacity: 1;}
+	65% { opacity: 0.3;}
+	70% { opacity: 1;}
+	75% { opacity: 0.3;}
+	80% { opacity: 1;}
+	85% { opacity: 0.3;}
+	90% {opacity: 1;}
+	95% { opacity: 0.5;}
+	100% {opacity: 0.3; -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes anirune {
+	0% { opacity: 0.3; -webkit-transform: rotate(0deg);}
+	10% { opacity: 1;}
+	15% { opacity: 0.3;}
+	20% { opacity: 1;}
+	25% { opacity: 0.3;}
+	30% { opacity: 1;}
+	35% { opacity: 0.3;}
+	40% { opacity: 1}
+	45% { opacity: 0.3;}
+	50% { opacity: 1;}
+	55% { opacity: 0.3;}
+	60% { opacity: 1;}
+	65% { opacity: 0.3;}
+	70% { opacity: 1;}
+	75% { opacity: 0.3;}
+	80% { opacity: 1;}
+	85% { opacity: 0.3;}
+	90% {opacity: 1;}
+	95% { opacity: 0.5;}
+	100% {opacity: 0.3; -webkit-transform: rotate(360deg);}
+}
+@keyframes anirune {
+	0% { opacity: 0.3; -webkit-transform: rotate(0deg);}
+	10% { opacity: 1;}
+	15% { opacity: 0.3;}
+	20% { opacity: 1;}
+	25% { opacity: 0.3;}
+	30% { opacity: 1;}
+	35% { opacity: 0.3;}
+	40% { opacity: 1}
+	45% { opacity: 0.3;}
+	50% { opacity: 1;}
+	55% { opacity: 0.3;}
+	60% { opacity: 1;}
+	65% { opacity: 0.3;}
+	70% { opacity: 1;}
+	75% { opacity: 0.3;}
+	80% { opacity: 1;}
+	85% { opacity: 0.3;}
+	90% {opacity: 1;}
+	95% { opacity: 0.5;}
+	100% {opacity: 0.3; -webkit-transform: rotate(360deg);}
+}
+.PC #it219 .IP_TOP .RUNE_TEXT{
+	position: absolute;
+	width:750px;
+	height:125px;
+	bottom: 0%;
+}
+/*輸入頁表頭區尾*/
+
+/*內容區*/
+.PC #it219 .CONTENT{
+	width:750px;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;
+	background-image:url(../images/con_bg.jpg);
+	background-size:100% auto;
+	}
+.PC #it219 .CONTENT_S{/*N*/
+	width:750px;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;}
+	
+.PC #it219 .e_TOP + .CONTENT_S{/*for 洗牌頁*/
+	margin-top: -20px;}
+	
+.PC #it219 .e_TOP + .CONTENT{/*for 結果頁*/
+	margin-top: -20px;}
+
+	
+/*內容框架*/
+.PC #it219 .CONTENT_TOP img, .PC #it219 .CONTENT_FOOT img{display:block; width:750px; height:34px; margin:auto;}	
+/*內容區尾*/
+
+/*共用按鈕*/
+/*灰按鈕*/
+.PC #it219 .e_BT_G{
+	width:50%;
+	height:50px;
+	font-size: 1.3rem;
+	color: #999;
+	font-weight:bold;
+	text-align:center;
+	line-height:47px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border:1px solid #9e9e9e;
+	background-color:#d2d2d2;
+	margin:0 auto;
+	}
+
+.PC #it219 .pq_e_BT ul.TWO span.PR{font-size: 1.3rem; margin-left: 5px; font-weight: normal;}
+.PC #it219 .pq_BT_FREE1 span.BR{font-size: 1.3rem; margin-left: 5px; font-weight: normal;}
+/*=========================輸入頁面頭區================*/
+.PC #it219 .CON_BOX{ 
+	width:670px;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;}
+	
+/*盧恩介紹頁用*/
+.PC #it219 .pq_INPUT_BOX2 .pq_INBAR{
+	height: 68px;
+	background-image: url(../images/input_bar2.jpg);
+	border: none;
+	color: #FFF;
+	line-height: 68px;
+	}
+.PC #it219 .pq_INPUT_BOX2 .pq_INBOX{
+	width: 98%;
+	margin: 0 auto;
+	border-color: #d7ad72;
+	border-width: 1px;}
+
+.PC #it219 .pq_INPUT_BOX2 .pq_INBOX .pq_LIST_ICON li{
+	margin-bottom: 8px;
+}
+.PC #it219 .pq_INPUT_BOX2 .pq_INBOX .LINE{
+	width: 100%;
+	height: 8px;
+	margin-top: 8px;
+	border-top: 1px dashed #d7ad72;}
+.PC #it219 .CON_BOX form{ 
+	width: 96%;
+	margin: 0 auto;
+}
+.PC #it219 .CON_BOX .pq_TIT_EX{
+	line-height: 2.1rem;
+	margin-bottom: 5px;}
+/*使用者反饋文*/
+.PC #it219 .FEEDBACK_TITLE{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.PC #it219 .FEEDBACK_BG{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 5px 0 10px 15px;
+    border-left: 1px solid #f2d4c8;
+	border-right: 1px solid #f2d4c8;
+	border-bottom: 1px solid #f2d4c8;
+	-webkit-box-sizing:border-box;
+	color: #333;
+}
+.PC #it219 .FEEDBACK_BG p.NAME{
+	text-align: right;
+	padding-right: 10px;  
+}
+/*關於科紫補*/
+.PC #it219 .TAROT_BOX_BAR, .PC #it219 .TAROT_BOX_BAR p{
+	height: 68px;
+	border: none;
+	color: #FFF;
+	line-height: 68px;
+}
+.PC #it219 .TAROT_BG{
+	width: 98%;
+	margin: 0 auto;
+	border-color: #d7ad72;
+	border-width: 1px;}
+.PC #it219 .TAROT_INSET{
+	width: 94%;
+}
+/*=========================輸入頁面尾區================*/
+
+/*=========================結果頁面頭區================*/
+/*結果頁表頭區*/	
+.PC #it219 .e_TOP{
+	width:100%;
+	height:270px;
+	background:url(../images/top_bg.png) no-repeat top center;
+	margin:0 auto;
+	}
+.PC #it219 h1{
+	width:700px;
+	height:280px;
+	margin:0 auto;
+	background:url(../images/input_top_title.png) no-repeat center;
+	text-indent:-9999px;
+	}
+/*結果頁表頭區尾*/
+
+/*取石動畫*/
+.PC #it219 .S_TOP{/*動畫標題頭*/
+	width:100%;
+	height:0;
+	padding-bottom:29.33333333%;
+	background-repeat:no-repeat;
+	background-size:cover;}
+		
+.PC #it219 .SHUFFLE{
+	width:750px;
+	height:645px;
+	margin:0 auto;
+	margin-bottom:15px;
+	border-left: 4px solid #d1c8ab;
+	border-right: 4px solid #d1c8ab;
+	border-bottom: 4px solid #d1c8ab;
+	position: relative;}
+	
+.PC #it219 .SIX{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 8px 0px;
+	-moz-box-shadow:2px 5px 30px #31b5b3 inset;
+	-webkit-box-shadow:2px 5px 30px #31b5b3 inset;
+	box-shadow:2px 5px 30px #31b5b3 inset;
+	background-color:#c6f2f1;
+	border-left: 4px solid #d1c8ab;
+	border-right: 4px solid #d1c8ab;}
+.PC #it219 .SIX ul{
+	width: 99%;
+	margin: 0 auto;}
+.PC #it219 .SIX li{
+	width: 16%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 19.5%;
+	position: relative;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	background-image: url(../images/st/runebg.png);
+	float: left;}
+.PC #it219 .SIX li+li{margin-left: 0.6%;}
+.PC #it219 .SIX li .ST_BG{
+	width:100%;
+	height:0px;
+	padding-bottom:119.68%;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	background-image: url(../images/st/rune_01.png);}
+.PC #it219 .SIX li .ST_BG img{
+	width: 95%;
+	padding-top: 6%;
+	padding-left: 7%;
+	height: auto;
+	margin: 0 auto;}
+.PC #it219 .STOP{
+	width:100%;
+	height:100%;}
+.PC #it219 .STOP img{width:100%; 
+	height:100%; }
+	
+/*動畫-錨點定位*/
+.PC #it219 a#start{
+	position: absolute;}
+.PC #it219 .SHUFFLE .F_RUNE{
+	position:absolute;
+	width:40%;
+	top:14%;
+	left:38.5%;}
+.PC #it219 .SHUFFLE .F_RUNE img{
+	width: 50%;
+	height: auto;}
+
+/*石頭+符文位置*/
+.PC #it219 .COM_MC{
+	width:750px;
+	height:auto;
+	overflow: hidden;
+	margin:0 auto;
+	margin-bottom:15px;
+	border-left: 4px solid #d1c8ab;
+	border-right: 4px solid #d1c8ab;
+	border-bottom: 4px solid #d1c8ab;}
+	
+.PC #it219 .CON_BOX>.COM_MC{
+	width:100%;
+	height:auto;
+	overflow: hidden;
+	margin:10px auto;
+	border:none;}
+	
+.PC #it219 .MC{
+	width: 100%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 91.0447%;
+	background-size: cover;
+	background-image: url(../images/st_paper.jpg);
+	position: relative;}
+.PC #it219 .MC .TEX_BG{
+	width:140px;
+	height: 145px;
+	position:absolute;}
+
+.PC #it219 .CON_BOX .TEX_BG{
+		width:20%;
+		height: auto;
+		position:absolute;
+		}
+
+.PC #it219 .MC .TEX{
+	width:100%;
+	height:0;
+	padding-bottom:105%;
+	background-repeat:no-repeat;
+	background-size:cover;}	
+.PC #it219 .MC .TEX img{
+	width: 55%;
+	padding-top: 8%;
+	margin-left: 22%;}
+/*個人資料*/
+.PC #it219 .INFOR{
+	width:auto;
+	height:auto;
+	overflow: hidden;
+	margin-left:40%;
+	padding-top: 4%;
+	}
+/*個人資料尾*/
+
+	
+/*結果頁內容區框架*/
+.PC #it219 .pq_RECOM_BOX{width: 80%;}
+.PC #it219 .pq_RECOM_BOX ul li:nth-child(1),.PC #it219 .pq_RECOM_BOX ul li:nth-child(2){margin-bottom: 14px;}
+
+/*符文+中英名稱*/	
+.PC #it219 .RN{
+	width: 70%;
+	height: auto;
+	overflow: hidden;
+	margin:0 auto 5px auto;}
+.PC #it219 .RN .LS{
+	display:inline-block;
+	width: 50%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 45.5%;
+	background-size: cover;
+	position: relative;
+	float: left;}
+.PC #it219 .RN .LS .ST_BG{
+	width:52%;
+	height:0px;
+	padding-bottom:65%;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	position:absolute;
+	background-image: url(../images/st/rune_01.png);
+	left:22.5%;
+	top:12%;}
+.PC #it219 .RN .LS .ST_BG img{
+	width: 80%;
+	padding-top: 10%;
+	margin-left: 10%;
+	height: auto;}
+.PC #it219 .RN .RS{
+	display: inline-block;
+	width: 50%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 45.5%;
+	background-size: cover;
+	background-image: url(../images/stname/r01.jpg);
+	position: relative;
+	float: right;}
+.PC #it219 .RN .RS ul{
+	width: 88%;
+	position: absolute;
+	top:24.5%;}
+.PC #it219 .RN .RS li{
+	width: 100%;
+	margin-bottom: 5%;}
+.PC #it219 .RN .RS li img{
+	width: 80%;
+	height: auto;
+	margin: 0 auto;}
+
+.PC #it219 .pq_RECOM2 .pq_LIST_ICON li{
+	line-height: 2.2rem;
+}
+/*========================結果頁面尾區================*/
+
+/*=========================試算頁面頭區================*/
+.PC #it219-wrapper .NEW_BT_F{/*浮水按鈕*/
+	width:100%;
+	height:60px;
+	position:fixed;
+	bottom:0;
+	z-index:1000;
+	background-image:url(../images/bt_bg.png);
+	background-repeat:repeat;
+	padding-top:3px;
+	}
+	
+.PC #it219-wrapper .NEW_BT_F a{/*浮水按鈕*/
+	display:block;
+	margin:0 auto;
+	width: 230px;
+	height: 55px;
+	font-size:1.5rem;
+	line-height: 55px;
+	text-decoration:none;
+	position: static;}
+		
+.PC #it219 a.pq_BT_FREE1{
+	position: absolute;
+	top: 25%;
+	left: 25%;
+}
+.PC #it219 a.pq_BT_FREE1:hover{
+	color: #faff77;
+}
+.PC #it219 .FREE_PH{ 
+	width:500px; 
+	height:auto; 
+	overflow:hidden; 
+	margin:5px auto; 
+	clear:both;}
+
+/*=========================試算頁面尾區================*/
+
+/*=========================浮水購買區塊================*/
+.PC #it219-wrapper #INPUT_BOX{
+	position: fixed;
+	width:255px;
+	height:280px;
+	right:3%;
+	top: 250px;
+	z-index: 2;}
+
+.PC #it219-wrapper #INPUT_BOX .BOX_TOP{
+	width:255px;
+	height:131px;
+	position:relative;
+	background-image:url(../images/input_box/in_top2.png);}
+.PC #it219-wrapper #INPUT_BOX .BOX_TOP a{
+	display:block;
+	position:absolute;
+	width:24px;
+	height:24px;
+	right:10px;
+	top:10px;
+	background-image:url(../images/input_box/in_top_x.png);
+	text-indent:-9999px;}
+.PC #it219-wrapper #INPUT_BOX .BOX_BG{
+	background-image:url(../images/input_box/in_bg.png);
+	width:255px;
+	height: 83px;
+	overflow:hidden;
+	padding:0 10px 0 20px;
+	text-align:center;}
+.PC #it219-wrapper #INPUT_BOX .BOX_BG p{
+	margin:8px auto;}
+.PC #it219-wrapper #INPUT_BOX .BLANK3{
+	height:8px;}
+	
+.PC #it219-wrapper #INPUT_BOX a.BT_PAY{
+	display:block;
+	width:140px;
+	height:34px;
+    margin:5px auto;
+    background-image: url(../images/free_bt.png);
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.1rem;
+	line-height:34px;
+	text-align: center;
+	text-shadow: 0 0 8px rgba(0,0,0,1);}
+.PC #it219-wrapper #INPUT_BOX a.BT_PAY:hover{
+	background-position:bottom;}
+.PC #it219-wrapper #INPUT_BOX .txt01 {FONT-SIZE: 12pt; COLOR: #c12dda; LINE-HEIGHT: 16px; FONT-FAMILY: Arial; TEXT-DECORATION: none;font-weight: bold;}
+.PC #it219-wrapper #INPUT_BOX .txt02 {FONT-SIZE: 10pt; COLOR: #333333; LINE-HEIGHT: 16px;  FONT-FAMILY: "Arial"; TEXT-DECORATION: line-through; }
+
+/*=========================浮水購買區塊尾================*/
+
+/*=========================列印頁面區================*/
+.PC #it219 .PRINT_TOP{
+	width:680px;
+	height:200px;
+	margin:0 auto;
+	border-left:1px solid  #33035f;
+	border-right:1px solid #33035f;
+	border-top:1px solid #33035f;}
+	.PC #it219 .PRINT_TOP img{width: 100%; height: auto;}
+	
+.PC #it219 .PRINT_BG{
+	width:680px;
+	border:1px solid #33035f;
+	background-color:#fff;
+	margin:0 auto;}
+/*=========================列印頁面尾區================*/
+
+/*平板小於內容js縮放*/	
+@media screen and (max-width: 750px){
+    .PC #it219{
+        width: 750px !important;
+        transform-origin: 0 0;
+    }
+}
+
+	
+/*==============================手機版=======手機版=====手機版====手機版===============================================*/
+
+/*MOBILE表頭尾*/	
+.MOBILE #float_icon, .MOBILE #header, .MOBILE .CHANG, .MOBILE .FOOT_MOBILE{ display:block;}
+/*MOBILE表頭尾*/	
+	
+/*消失區*/
+.MOBILE #it219-wrapper #INPUT_BOX,.MOBILE .PC_LOGIN,.MOBILE .FOOT_PC { display:none;}
+/*消失區尾*/
+ 
+	 
+/*框架區*/
+.MOBILE #it219{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	margin-top:45px;
+	-webkit-box-sizing:border-box;
+	}
+.MOBILE #it219 .FRAME{width:100%; height:auto; overflow:hidden; margin:0 auto;}
+.MOBILE #it219{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	background-image:url(../images/bg.jpg);
+	background-size:230% auto;
+	background-repeat:no-repeat;
+	background-position:top center;
+	-webkit-box-sizing:border-box;
+	}
+/*框架區尾*/
+/*輸入頁表頭區*/
+.MOBILE #it219 .IP_FRAME{
+	width:95%;
+	height:0; 
+	padding-bottom: 95%;
+	margin:0 auto;
+	overflow:hidden; 
+	background-image:url(../images/input_bg.png);
+	background-position:bottom center;
+	background-size:100% auto;
+	background-repeat:no-repeat;
+	position: relative;
+	}
+.MOBILE #it219 .IP_TOP{
+	width:100%;
+	margin:0 auto;
+	}
+	
+.MOBILE #it219 .IP_TOP h1{
+	width: 100%;
+	height: 0px;
+	overflow: hidden;
+	background-image:url(../images/input_top_title.png);
+	background-size: cover;
+	padding-bottom: 38%;
+	margin-top: 1%;
+	text-indent:-9999px;
+	background-repeat:no-repeat;
+
+	}
+	
+.MOBILE #it219 .IP_TOP .ANIMAX{/*盧恩動畫*/
+	width:48%;
+	height:0;
+	padding-bottom: 46.5%;
+	position: absolute;
+	background-image: url(../images/animax.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	top: 42.2%;
+	left: 25.3%;
+	-webkit-animation: anirune 30s infinite ease-in-out;
+	-moz-animation: anirune 30s infinite ease-in-out;
+	animation: anirune 30s infinite ease-in-out;
+}
+.MOBILE #it219 .IP_TOP .RUNE_TEXT{
+	position: absolute;
+	width:118%;
+	height:auto;
+	left: -10%;
+	bottom: 0%;
+}	
+.MOBILE #it219 .IP_TOP .RUNE_TEXT img{width: 100%; height: auto;}
+/*輸入頁表頭區尾*/
+
+	
+/*內容區*/
+.MOBILE #it219 .CONTENT{
+	width:95%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;
+	background-image:url(../images/con_bg.jpg);
+	background-repeat:repeat-y;
+	background-size:100% auto;
+	}
+.MOBILE #it219 .CONTENT_S{/*N*/
+	width:95%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;}
+	
+.MOBILE #it219 .e_TOP + .CONTENT_S{/*for 洗牌頁*/
+	margin-top: -40px;}
+	
+.MOBILE #it219 .e_TOP + .CONTENT{/*for 結果頁*/
+	margin-top: -40px;}
+/*內容框架*/
+.MOBILE #it219 .CONTENT img{display:block; width:100%; height:auto; margin:auto;}
+.MOBILE #it219 .CONTENT_TOP img, .MOBILE #it219 .CONTENT_FOOT img{ display:block; width:100%; height:auto; margin:auto;}
+/*共用按鈕*/
+.MOBILE #it219 .pq_e_BT ul.TWO li a{
+	width: 100%;
+	font-size: 1.3rem;}
+	.MOBILE #it219 .pq_e_BT ul.TWO li:first-child{width: 45%;}
+	.MOBILE #it219 .pq_e_BT ul.TWO li:last-child{width: 53%;float: right;}
+	
+.MOBILE #it219 .pq_e_BT ul.TWO span.PR{font-size: 0.8em; margin-left: 2px; font-weight: normal;}
+.MOBILE #it219 .pq_BT_FREE1 span.BR{font-size: 1.1rem; margin-left: 4px; font-weight: normal;}
+	
+/*灰按鈕*/
+.MOBILE #it219 .e_BT_G{
+	width:100%;
+	height:50px;
+	font-size: 1.3rem;
+	color: #999;
+	font-weight:bold;
+	text-align:center;
+	line-height:47px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border:1px solid #9e9e9e;
+	background-color:#d2d2d2;
+	margin:0 auto;
+	}
+				
+/*=========================輸入頁面頭區================*/
+/*BOX01頭*/
+.MOBILE #it219 .CON_BOX{ 
+	width:90%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;}
+	
+/*盧恩介紹頁用*/
+.MOBILE #it219 .pq_INPUT_BOX2 {margin-top: 0;}
+.MOBILE #it219 .pq_INPUT_BOX2 .pq_INBAR{
+	background-image: none;
+	background-color: #9c6415;
+	height: 45px;
+	color: #FFF;
+	line-height: 45px;}
+.MOBILE #it219 .pq_INPUT_BOX2 .pq_INBOX{
+	width: 100%;
+	margin: 0 auto;
+	border:1px solid #d7ad72;
+	padding: 3%;}
+.MOBILE #it219 .pq_INPUT_BOX2 .pq_INBOX .LINE{
+	width: 100%;
+	height: 8px;
+	margin-top: 8px;
+	border-top: 1px dashed #d7ad72;}
+.MOBILE #it219 .CON_BOX form{ 
+	width: 96%;
+	margin: 0 auto;
+}
+.MOBILE #it219 .CON_BOX .pq_ADT3{font-size: 5vw;}
+.MOBILE #it219 .CON_BOX .pq_TIT_EX{
+	line-height: 2.1rem;
+	margin-bottom: 5px;}
+/*使用者反饋文*/
+.MOBILE #it219 .FEEDBACK_TITLE{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.MOBILE #it219 .FEEDBACK_BG{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 5px 15px 10px 15px;
+    border-left: 1px solid #f2d4c8;
+	border-right: 1px solid #f2d4c8;
+	border-bottom: 1px solid #f2d4c8;
+	-webkit-box-sizing:border-box;
+	color: #333;
+}
+.MOBILE #it219 .FEEDBACK_BG p.NAME{
+	text-align: right;
+	padding-right: 10px;  
+}
+/*關於科紫補*/
+.MOBILE #it219 .TAROT_BOX_BAR, .MOBILE #it219 .TAROT_BOX_BAR p{
+	background-image: none;
+	background-color: #9c6415;
+	height: 45px;
+	color: #FFF;
+	line-height: 45px;
+}
+.MOBILE #it219 .TAROT_BG{
+	width: 100%;
+	margin: 0 auto;
+	border:1px solid #d7ad72;
+	padding: 3% 1%;}
+.MOBILE #it219 .TAROT_INSET{
+	width: 94%;
+}	
+.MOBILE #it219 .CON_BOX .COM{
+	width:95%;
+	height:auto;
+	overflow:hidden;
+	margin:0 auto;
+	padding:5px;}
+/*=========================輸入頁面尾區================*/
+
+
+
+/*=========================結果頁面頭區================*/
+/*結果頁表頭區*/	
+.MOBILE #it219 .e_TOP{
+	width:100%;
+	height:0;
+	padding-bottom:46%;
+	padding-top: 6px;
+	background:url(../images/top_bg.png) no-repeat top center;
+	background-size:cover;
+	margin:0 auto;
+	}
+.MOBILE #it219 h1{
+	width:100%;
+	height:0;
+	padding-bottom: 36%;
+	margin-left: 1%;
+	background:url(../images/input_top_title.png) no-repeat top center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	text-indent:-9999px;
+	}
+/*結果頁表頭區尾*/
+
+/*翻牌動畫*/
+.MOBILE #it219 .S_TOP{/*動畫標題頭*/
+	width:100%;
+	height:0;
+	padding-bottom:29.33333333%;
+	background-repeat:no-repeat;
+	background-size:cover;}
+	
+.MOBILE #it219 .SHUFFLE{
+	width:100%;
+	height:auto;
+	margin:0 auto;
+	margin-bottom:10px;
+	border-left: 2px solid #d1c8ab;
+	border-right: 2px solid #d1c8ab;
+	border-bottom: 2px solid #d1c8ab;
+	position: relative;}
+	
+.MOBILE #it219 .SIX{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 8px 0px;
+	-moz-box-shadow:2px 5px 30px #31b5b3 inset;
+	-webkit-box-shadow:2px 5px 30px #31b5b3 inset;
+	box-shadow:2px 5px 30px #31b5b3 inset;
+	background-color:#c6f2f1;
+	border-left: 2px solid #d1c8ab;
+	border-right: 2px solid #d1c8ab;}
+.MOBILE #it219 .SIX ul{
+	width: 99%;
+	margin: 0 auto;}
+.MOBILE #it219 .SIX li{
+	width: 16%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 19.5%;
+	position: relative;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	background-image: url(../images/st/runebg.png);
+	float: left;}
+.MOBILE #it219 .SIX li+li{margin-left: 0.6%;}
+.MOBILE #it219 .SIX li .ST_BG{
+	width:100%;
+	height:0px;
+	padding-bottom:119.68%;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	background-image: url(../images/st/rune_01.png);}
+.MOBILE #it219 .SIX li .ST_BG img{
+	width: 95%;
+	padding-top: 6%;
+	padding-left: 7%;
+	height: auto;
+	margin: 0 auto;}
+.MOBILE #it219 .STOP{
+	width:100%;
+	height:100%;}
+.MOBILE #it219 .STOP img{width:100%; 
+	height:100%; }
+	
+/*動畫-錨點定位*/
+.MOBILE #it219 a#start{
+	position: absolute;
+	top:25%;}
+.MOBILE #it219 .SHUFFLE .F_RUNE{
+	position:absolute;
+	width:40%;
+	top:14%;
+	left:38.5%;}
+.MOBILE #it219 .SHUFFLE .F_RUNE img{
+	width: 50%;
+	height: auto;}
+
+/*石頭+符文位置*/
+.MOBILE #it219 .COM_MC{
+	width:100%;
+	height:auto;
+	overflow: hidden;
+	margin:0 auto;
+	margin-bottom:10px;
+	border-left: 2px solid #d1c8ab;
+	border-right: 2px solid #d1c8ab;
+	border-bottom: 2px solid #d1c8ab;}
+	
+.MOBILE #it219 .CON_BOX>.COM_MC{
+	width:100%;
+	height:auto;
+	overflow: hidden;
+	margin:3px auto;
+	border:none;}
+	
+.MOBILE #it219 .MC{
+	width: 100%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 91.0447%;
+	background-size: cover;
+	background-image: url(../images/st_paper.jpg);
+	position: relative;}
+.MOBILE #it219 .MC .TEX_BG{
+	width:20%;
+	position:absolute;}
+.MOBILE #it219 .MC .TEX{
+	width:100%;
+	height:0;
+	padding-bottom:105%;
+	background-repeat:no-repeat;
+	background-size:cover;}	
+.MOBILE #it219 .MC .TEX img{
+	width: 50%;
+	padding-top: 10%;
+	margin-left: 25%;}
+
+/*個人資料*/
+.MOBILE #it219 .INFOR{
+	width:auto;
+	height:auto;
+	overflow: hidden;
+	margin-left:40%;
+	padding-top: 4vw;}
+	.MOBILE #it219 .INFOR .pq_TIT3{/*使用者文*/
+	display: block;
+	font-size:4vw;
+	line-height: 1.3em;
+	font-weight: bold;}
+/*個人資料尾*/
+
+.MOBILE #it219 .BLANK{ width:100%; height:15px; clear: both;}	
+/*結果頁內容區框架*/
+.MOBILE #it219 .pq_RECOM_BOX{width: 90%; padding-top: 0;}
+.MOBILE #it219 .pq_RECOM_BOX .pq_REPIC{margin-bottom: 15px;}
+.MOBILE #it219 .pq_RECOM_BOX ul li:nth-child(1),.MOBILE #it219 .pq_RECOM_BOX ul li:nth-child(2){margin-bottom: 14px;}
+
+/*符文+中英名稱*/	
+.MOBILE #it219 .RN{
+	width: 90%;
+	height: auto;
+	overflow: hidden;
+	margin:0 auto 8px auto;}
+.MOBILE #it219 .RN .LS{
+	width: 50%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 45.5%;
+	background-size: cover;
+	position: relative;
+	float: left;}
+.MOBILE #it219 .RN .LS .ST_BG{
+	width:52%;
+	height:0px;
+	padding-bottom:65%;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	position:absolute;
+	background-image: url(../images/st/rune_01.png);
+	left:22.5%;
+	top:12%;}
+.MOBILE #it219 .RN .LS .ST_BG img{
+	width: 80%;
+	padding-top: 10%;
+	margin-left: 10%;
+	height: auto;}
+.MOBILE #it219 .RN .RS{
+	display: inline-block;
+	width: 50%;
+	height: 0px;
+	overflow: hidden;
+	padding-bottom: 45.5%;
+	background-size: cover;
+	background-image: url(../images/stname/r01.jpg);
+	position: relative;
+	float: right;}
+.MOBILE #it219 .RN .RS ul{
+	width: 88%;
+	position: absolute;
+	top:24.5%;}
+.MOBILE #it219 .RN .RS li{
+	width: 100%;
+	margin-bottom: 5%;}
+	.MOBILE #it219 .RN .RS li:nth-child(2){
+		width: 100%;
+		margin-top: 10px;}
+.MOBILE #it219 .RN .RS li img{
+	width: 80%;
+	height: auto;
+	margin: 0 auto;}
+
+/*內容欄位樣式用尾*/
+.MOBILE #it219 .PRINT{ display:none;}
+/*========================結果頁面尾區================*/
+
+/*=========================試算頁面頭區================*/
+
+.MOBILE #it219-wrapper .NEW_BT_F{/*浮水按鈕*/
+	width:100%;
+	height:60px;
+	position:fixed;
+	bottom:0;
+	z-index:1000;
+	background-image:url(../images/bt_bg.png);
+	background-repeat:repeat;
+	padding-top:7px;
+	background-size:15px 15px;
+	}
+	
+.MOBILE #it219-wrapper .NEW_BT_F a{/*浮水按鈕*/
+	display:block;
+	margin:0 auto;
+	width: 200px;
+	height: 47px;
+	font-size:1.5rem;
+	line-height: 47px;
+	text-decoration:none;
+	position: static;}
+		
+.MOBILE #it219 a.pq_BT_FREE1{
+	width: 230px;
+	height: 55px;
+	font-size:1.5rem;
+	line-height: 55px;
+	position: absolute;
+	top: 25%;
+	left: 10%;
+}
+.MOBILE #it219 .FREE_PH{ 
+	width:100%; 
+	height:auto; 
+	overflow:hidden; 
+	margin-top:-15px; 
+	clear:both;}
+		
+.MOBILE #it219 .FREE_PH img{ clear:both;display:block;width:100%; height:auto;}
+/*=========================試算頁面尾區================*/
+
+@media screen and (max-width:330px){/*for i5*/
+	.MOBILE #it219 .pq_TIT3{line-height: 1.4em;}
+	.MOBILE #it219 .pq_RECOM_BOX{width: 93%;}
+	.MOBILE #it219 .pq_RETEXT{width: 96%; margin: 0 auto;}
+	.MOBILE #it219 a.pq_BT_FREE1{left: 4%;}
+	.MOBILE #it219 .RN .RS li:nth-child(2){margin-top: 6px;}
+}
+@media screen and (min-width:568px){/*for橫螢幕*/
+	.MOBILE #it219 .e_TOP{padding-bottom:40%;}
+	.MOBILE #it219 a.pq_BT_FREE1{left: 27%;}
+}

@@ -1,0 +1,152 @@
+.PC .flash-rear{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.MOBILE .flash-rear{
+  position: relative;
+  overflow: hidden;
+}
+.PC .flash-rear > img{
+  width: 100%;
+  height: 100%;
+}
+/* change axis here */
+.flash-rear > div:not([class^="wrap-"]){
+  position: absolute;
+  top: 49%;
+  left: 42%;
+  transition: transform 1.25s linear;
+}
+.PC .flash-rear > div:not([class^="wrap-"]) > img{
+  width: 112px !important;
+  height: auto !important;
+}
+.MOBILE .flash-rear > div:not([class^="wrap-"]) > img{
+  width: 23% !important;
+  height: auto !important;
+}
+
+.PC .wrapper {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+/* .PC .wrapper:hover > #theme {
+  display: block !important;
+} */
+.PC .wrapper #theme {
+  /* display: none; */
+  position: relative;
+  width: -webkit-fill-available;
+  padding-bottom: 91.0447%;
+  height: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+}
+.PC .wrapper:hover #theme {
+  opacity: 1;
+}
+.PC .wrapper:hover #theme .btn {
+  display: block !important;
+}
+.PC .wrapper .btn {
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 1s ease-out;
+  -moz-transition: opacity 1s ease-out;
+  -webkit-transition: opacity 1s ease-out;
+  -o-transition: opacity 1s ease-out;
+}
+.PC .wrapper .btn > a {
+  display: block;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%) !important; /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+      -ms-transform: translate(-50%, -50%) !important; /* IE 9 */
+          transform: translate(-50%, -50%) !important; /* IE 10, Fx 16+, Op 12.1+ */
+  top: 50% !important;
+  z-index: 3;
+  font-size: 1.5rem;
+  width: 315px;
+  height: 75px;
+  line-height: 75px;
+}
+.MOBILE .wrapper .btn > a {
+  display: none;
+}
+.PC .wrapper .btn > a:first-child {
+  left: 28% !important;
+}
+.PC .wrapper .btn > a:last-child {
+  left: 72% !important;
+}
+.PC .wrapper .btn:hover {
+  display: block !important;
+}
+.PC .wrapper:hover #theme > .btn {
+  opacity: 1;
+}
+.PC .pq_BT_SROUND {
+  cursor: pointer;
+}
+
+#it219 .SHUFFLE {
+  overflow: hidden;
+}
+
+.PC #it219-wrapper #INPUT_BOX {
+  top: 29%;
+  right: 0%;
+}
+
+.PC #it219 {
+  background: url(../images/bg.jpg) no-repeat center center fixed;
+  z-index: 1;
+}
+/*Edge*/
+/* @supports ( -ms-accelerator:true )
+{
+    html{
+        overflow: hidden;
+        height: 100%;
+    }
+    body{
+        overflow: auto;
+        height: 100%;
+    }
+} */
+/*Ie 10/11*/
+/* @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+{
+    html{
+        overflow: hidden;
+        height: 100%;
+    }
+    body{
+        overflow: auto;
+        height: 100%;
+    }
+} */
+.center > p:first-child{
+  position: relative;
+  left: calc(100%/2 - 130px/2);
+}
+.center > p:last-child{
+  position: relative;
+  top: -45px;
+  left: calc(100%/2 - 130px/2 + 130px);
+  color: #d39a15;
+  font-size: 30px;
+  float: left;
+}
+.MOBILE .pq_TWO_COM .pq_REPIC {
+  width: unset;
+  margin-left: unset;
+}

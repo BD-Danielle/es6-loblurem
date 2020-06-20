@@ -1,0 +1,154 @@
+@import url("reset.css");
+
+*{-webkit-box-sizing:border-box;
+	-webkit-text-size-adjust:none;
+	text-decoration:none;
+	font-family:Arial, Helvetica, "微軟正黑體", sans-serif;}
+
+#header{
+	width:100%;
+	height:45px;
+	background-color:#6e25a8;
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:999;
+	}
+	
+/*首頁*/
+#header .LOGO{
+	position:absolute;
+	width:92px;
+	height:45px;
+	left:2%;
+	top:0;
+	}
+#header .LOGO a{
+	display:block;
+	width:92px;
+	height:45px;
+	background-image:url(../images/header/index_logo.png);
+	background-repeat:no-repeat;
+	background-size:92px 25px;
+	background-position:center center;
+	text-indent:-9999px;
+	}
+#header .R_LIST{
+	position:absolute;
+	width: 40px;
+	height: 45px;
+	right:1.5%;
+	top: 0;
+	}
+#header .R_LIST a{
+	display:block;
+	width:40px;
+	height:45px;
+	background-image:url(../images/header/list_m.png);
+	background-repeat:no-repeat;
+	background-size:35px 35px;
+	background-position:center right;
+	text-indent:-9999px;
+	}
+	
+#header .HEADER_MENU{
+	position:absolute;
+	width: 160px;
+	height: 45px;
+	right: 43px;
+	top: 0;
+	}
+#header .HEADER_MENU ul{
+	}
+#header .HEADER_MENU ul li{
+	float:left;
+	width:40px;
+	height:45px;
+	}
+	
+#header .HEADER_MENU li a{
+	display:block;
+	width:100%;
+	height:45px;
+	color:#FFF;
+	font-size:0.75em;
+	text-align:center;
+	padding-top:27px;
+	background-size:25px 25px;
+	background-repeat:no-repeat;
+	background-position:top 3px center;
+	}
+#header .HEADER_MENU li a.A{
+	background-image:url(../images/header/star.png);
+	}
+#header .HEADER_MENU li a.B{
+	background-image:url(../images/header/psy.png);
+	}
+#header .HEADER_MENU li a.C{
+	background-image:url(../images/header/japan.png);
+	}
+#header .HEADER_MENU li a.D{
+	background-image:url(../images/header/member.png);
+	}
+	
+	
+	
+/*內頁功能頁*/
+
+#header .LOGO_IN{
+	position:absolute;
+	width:50px;
+	height:45px;
+	left:0%;
+	top:0;
+	}
+#header .LOGO_IN a{
+	display:block;
+	width:40px;
+	height:40px;
+	margin:0 auto;
+	background-image:url(../images/header/inside_logo.png);
+	background-repeat:no-repeat;
+	background-size:35px 35px;
+	background-position:center center;
+	text-indent:-9999px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border:1px solid #fff;
+	margin-top:2px;
+	}
+	
+#header .RECORD{
+	position:absolute;
+	width:45px;
+	height:45px;
+	right:43px;
+	top:0;}
+	
+#header .RECORD a{
+	display:block;
+	width:40px;
+	height:45px;
+	background-image:url(../images/header/record.png);
+	background-repeat:no-repeat;
+	background-size:35px 35px;
+	background-position:center right;
+	text-indent:-9999px;
+	}
+	
+#header h1{
+	position:absolute;
+	width:auto;
+	height:45px;
+	left:55px;
+	top:0;}
+	
+	
+#header h1 a{
+	display:block;
+	color:#fff;
+	font-size:0.8em;
+	line-height:45px;
+	font-weight:normal;
+	font-family:Arial, Helvetica, "微軟正黑體", sans-serif;}
