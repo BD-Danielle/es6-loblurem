@@ -274,14 +274,13 @@ let Loblurem;
     }
 
     loblurem = this.createText(count, type, svgWidth, i, element);
-    if (element) {
-      if (loblurem !== false) {
-        element.innerHTML += loblurem;
-      }
-      this.detectBtn(element);
-      this.copyForbidden(element);
-    }
-    if (element == null) return loblurem;
+    if (element == null && loblurem == null) return;
+    // if (loblurem !== false) {
+    element.innerHTML += loblurem;
+    // }
+    this.detectBtn(element);
+    this.copyForbidden(element);
+    // if (element == null) return loblurem;
   };
   window.addEventListener('DOMContentLoaded', function () {
     // Select all elements that has a data-boblurem attribute
