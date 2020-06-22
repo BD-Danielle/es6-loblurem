@@ -108,7 +108,7 @@ let Loblurem;
   Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO) {
     let first_few_rows = last_row = '';
     for (let i = 0; i < rows.length; i++) {
-      if(i <= rows.length - 1){
+      if(i < rows.length - 1){
         first_few_rows += `
         <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
