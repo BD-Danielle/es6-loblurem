@@ -23,6 +23,7 @@ let Loblurem;
   };
   //Static letiables
   Loblurem.COMMA;
+  Loblurem.TEXT_LENGTH;
   Loblurem.TEXT = 2;
   Loblurem.TEXT_TYPE = {
     PARAGRAPH: 1,
@@ -86,7 +87,7 @@ let Loblurem;
     rangeArray = this.customSplice(rangeArray, 7);
     rangeArray = this.shuffle(rangeArray);
     // console.log('after ' + rangeArray);
-    if (comma == false) return;
+    if (!comma) return;
 
     rangeArray.reduce((accumulator, currentValue, currentIndex, array) => {
       let target_index = ((accumulator + currentValue) >= wordsArray.length) ? wordsArray.length - 1 : (accumulator + currentValue);
@@ -105,16 +106,16 @@ let Loblurem;
     return keep;
   }
   // Template literals embedded.
-  Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO) {
+  Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO, offsetX, textLength) {
     let first_few_rows = last_row = '';
     for (let i = 0; i < rows.length; i++) {
-      if(i < rows.length - 1){
+      if (i < rows.length - 1) {
         first_few_rows += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${textLength == false ? 0 : svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
-      }else{
+      } else {
         last_row = `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
       }
     }
@@ -148,7 +149,7 @@ let Loblurem;
           console.log(paragraph);
         }
         return paragraphs.join('');
-      //sentences are loads of words.
+        //sentences are loads of words.
       case Loblurem.TEXT_TYPE.SENTENCE:
         let sentences = new Array;
         for (let i = 0; i < count; i++) {
@@ -159,7 +160,7 @@ let Loblurem;
           sentences.push(sentence);
         }
         return sentences.join('');
-      //words are words
+        //words are words
       case Loblurem.TEXT_TYPE.WORD:
         let strings;
         if (element.hasAttribute('data-loblurem-plaintext') && element.getAttribute('data-loblurem-plaintext').length > 0) {
@@ -185,7 +186,6 @@ let Loblurem;
         }
         let rows = new Array;
         let maxWordsInRow = Math.floor(svgWidth / (fontSize + letterSpacing)) - 1;
-
         if (maxWordsInRow > 0) {
           while (strings.length > 0) {
             rows.push(strings.slice(0, maxWordsInRow));
@@ -198,31 +198,54 @@ let Loblurem;
         };
         let lineSpacing = parseInt(options[2], 10); //行距
         let svgHeight = fontSize * rows.length + lineSpacing * (rows.length == 1 ? 1 : rows.length - 1);
-        let result = this.template(rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO);
+        let offsetX = this.display(element, count, svgWidth, fontSize, letterSpacing);
+        let textLength = Loblurem.TEXT_LENGTH;
+        console.log(textLength);
+        let result = this.template(rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO, offsetX, textLength);
+
         return result;
     }
+  };
+  Loblurem.prototype.display = function (element, count, svgWidth, fontSize, letterSpacing) {
+    let display, offsetX;
+
+    if (element.hasAttribute('data-loblurem-display') && element.getAttribute('data-loblurem-display').length > 0) {
+      display = element.getAttribute('data-loblurem-display');
+
+      switch (display) {
+        case "middle":
+          offsetX = svgWidth / 2 - (fontSize * count + letterSpacing * (count - 1)) / 2;
+          return offsetX;
+
+        case "right":
+          offsetX = svgWidth - (fontSize * count + letterSpacing * (count - 1)) - 3;
+          return offsetX;
+
+        default:
+          return offsetX = 3;
+      }
+    }
+    return offsetX = 3;
   };
   Loblurem.prototype.detectBtn = function (element) {
     let btn = $(element).find('[data-loblurem-btn]');
     if (btn.length == 0) return;
+    // (function(){
     let btnArray = [0, 0];
     for (let i = 0; i < btn.length; i++) {
       $(btn[i]).css('position', 'absolute');
       // btnArray.push($(btn[i]).height());
       btnArray[i] = $(btn[i]).height();
     }
-    
+
     let eleHeight = $(element).height();
     for (let i = 0; i < btn.length; i++) {
-      let top, btn0 = btnArray[0], btn1 = btnArray[1];
+      let top, btn0 = btnArray[0],
+        btn1 = btnArray[1];
       let styles = {
         top: function () {
-          if (i == 0) {
-            top = eleHeight - ($(element).find('svg').height() / 2) - (btn0 / 2) + 'px';
-          }
-          if (i == 1) {
-            top = eleHeight - ($(element).find('svg').height() / 2) + (btn0 / 2) + 'px';
-          }
+          if (i == 0) top = eleHeight - ($(element).find('svg').height() / 2) - (btn0 / 2) + 'px';
+          if (i == 1) top = eleHeight - ($(element).find('svg').height() / 2) + (btn0 / 2) + 'px';
           return top;
         },
         left: '50%',
@@ -233,6 +256,8 @@ let Loblurem;
       $(btn[i]).css(styles);
     }
     $(element).css('position', 'relative');
+
+    // })()
     // }
     // return;
   };
@@ -245,7 +270,7 @@ let Loblurem;
       '-khtml-user-select': 'none',
     };
     $(element).find('svg').css(css);
-  }
+  };
   Loblurem.prototype.createLoblurem = function (element, svgWidth, i) {
     let loblurem;
     let count;
@@ -261,17 +286,23 @@ let Loblurem;
     }
 
     let typeInput = words[words.length - 1]; //fetch last index value
-    if (typeInput == 'p') {
-      type = Loblurem.TEXT_TYPE.PARAGRAPH;
-    } else if (typeInput == 's') {
-      type = Loblurem.TEXT_TYPE.SENTENCE;
-    } else if (typeInput == 'w') {
-      type = Loblurem.TEXT_TYPE.WORD;
-      Loblurem.COMMA = true;
-    } else if (typeInput == 'W') {
-      type = Loblurem.TEXT_TYPE.WORD;
-      Loblurem.COMMA = false;
-    }
+    if (typeInput == null) return;
+    switch (typeInput) {
+      case 'p':
+        type = Loblurem.TEXT_TYPE.PARAGRAPH;
+      case 's':
+        type = Loblurem.TEXT_TYPE.SENTENCE;
+      case 'w':
+        type = Loblurem.TEXT_TYPE.WORD;
+        Loblurem.TEXT_LENGTH = true;
+        Loblurem.COMMA = true;
+      case 'W':
+        type = Loblurem.TEXT_TYPE.WORD;
+        Loblurem.TEXT_LENGTH = false;
+        Loblurem.COMMA = false;
+      default:
+        break;
+    };
 
     loblurem = this.createText(count, type, svgWidth, i, element);
     if (element == null && loblurem == null) return;
@@ -283,8 +314,10 @@ let Loblurem;
     // if (element == null) return loblurem;
   };
   window.addEventListener('DOMContentLoaded', function () {
-    // Select all elements that has a data-boblurem attribute
-    let els = document.querySelectorAll('[data-loblurem]'), svgWidth;
+    // Select all elements that has a data-loblurem attribute
+    let els = document.querySelectorAll('[data-loblurem]'),
+      svgWidth;
+
     function forLoops() {
       for (let i in els) {
         if (els.hasOwnProperty(i)) {

@@ -25,6 +25,7 @@ var Loblurem = void 0;
   };
   //Static letiables
   Loblurem.COMMA;
+  Loblurem.TEXT_LENGTH;
   Loblurem.TEXT = 2;
   Loblurem.TEXT_TYPE = {
     PARAGRAPH: 1,
@@ -86,7 +87,7 @@ var Loblurem = void 0;
     rangeArray = this.customSplice(rangeArray, 7);
     rangeArray = this.shuffle(rangeArray);
     // console.log('after ' + rangeArray);
-    if (comma == false) return;
+    if (!comma) return;
 
     rangeArray.reduce(function (accumulator, currentValue, currentIndex, array) {
       var target_index = accumulator + currentValue >= wordsArray.length ? wordsArray.length - 1 : accumulator + currentValue;
@@ -109,17 +110,16 @@ var Loblurem = void 0;
     return keep;
   };
   // Template literals embedded.
-  Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO) {
-    var flag_one = '';
-    var flag_two = '';
+  Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO, offsetX, textLength) {
+    var first_few_rows = last_row = '';
     for (var i = 0; i < rows.length; i++) {
       if (i < rows.length - 1) {
-        flag_one += '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + fontSize + 'px" x="3px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + letterSpacing + 'px" textLength="' + (svgWidth - 10) + '" font-size="' + fontSize + 'px" filter="url(#drop-shadow)" fill="' + fontColor + '">' + rows[i] + '</text>\n        ';
+        first_few_rows += '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + fontSize + 'px" x="' + offsetX + 'px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + letterSpacing + 'px" textLength="' + (textLength == false ? 0 : svgWidth - 10) + '" font-size="' + fontSize + 'px" filter="url(#drop-shadow)" fill="' + fontColor + '">' + rows[i] + '</text>\n        ';
       } else {
-        flag_two = '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + fontSize + 'px" x="3px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + letterSpacing + 'px" font-size="' + fontSize + 'px" filter="url(#drop-shadow)" fill="' + fontColor + '">' + rows[i] + '</text>\n        ';
+        last_row = '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + fontSize + 'px" x="' + offsetX + 'px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + letterSpacing + 'px" font-size="' + fontSize + 'px" filter="url(#drop-shadow)" fill="' + fontColor + '">' + rows[i] + '</text>\n        ';
       }
     }
-    return '\n    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="' + svgWidth + 'px" height="' + (svgHeight + 7) + 'px" display="block">\n      <filter id="drop-shadow' + idNO + '"><feGaussianBlur stdDeviation="' + (typeof stdDeviation == "undefined" ? stdDeviation = 4 : stdDeviation) + '" result="drop-shadow"></feGaussianBlur></filter>\n        ' + flag_one + flag_two + '\n    </svg>\n    ';
+    return '\n    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="' + svgWidth + 'px" height="' + (svgHeight + 7) + 'px" display="block">\n      <filter id="drop-shadow' + idNO + '"><feGaussianBlur stdDeviation="' + (typeof stdDeviation == "undefined" ? stdDeviation = 4 : stdDeviation) + '" result="drop-shadow"></feGaussianBlur></filter>\n        ' + first_few_rows + last_row + '\n    </svg>\n    ';
   };
   // Inset punch symbol into text array
   Loblurem.prototype.insert = function (array, index, punch) {
@@ -149,6 +149,7 @@ var Loblurem = void 0;
         var sentences = new Array();
         for (var _i = 0; _i < count; _i++) {
           var sentenceLength = this.randomInt(5, 10);
+          console.log(sentenceLength);
           var words = this.createText(sentenceLength, Loblurem.TEXT_TYPE.WORD, svgWidth, element);
           var sentence = words;
           sentences.push(sentence);
@@ -180,7 +181,6 @@ var Loblurem = void 0;
         }
         var rows = new Array();
         var maxWordsInRow = Math.floor(svgWidth / (fontSize + letterSpacing)) - 1;
-
         if (maxWordsInRow > 0) {
           while (strings.length > 0) {
             rows.push(strings.slice(0, maxWordsInRow));
@@ -193,62 +193,85 @@ var Loblurem = void 0;
         };
         var lineSpacing = parseInt(options[2], 10); //行距
         var svgHeight = fontSize * rows.length + lineSpacing * (rows.length == 1 ? 1 : rows.length - 1);
-        var result = this.template(rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO);
+        var offsetX = this.display(element, count, svgWidth, fontSize, letterSpacing);
+        var textLength = Loblurem.TEXT_LENGTH;
+        console.log(textLength);
+        var result = this.template(rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO, offsetX, textLength);
+
         return result;
     }
   };
+  Loblurem.prototype.display = function (element, count, svgWidth, fontSize, letterSpacing) {
+    var display = void 0,
+        offsetX = void 0;
+
+    if (element.hasAttribute('data-loblurem-display') && element.getAttribute('data-loblurem-display').length > 0) {
+      display = element.getAttribute('data-loblurem-display');
+
+      switch (display) {
+        case "middle":
+          offsetX = svgWidth / 2 - (fontSize * count + letterSpacing * (count - 1)) / 2;
+          return offsetX;
+
+        case "right":
+          offsetX = svgWidth - (fontSize * count + letterSpacing * (count - 1)) - 3;
+          return offsetX;
+
+        default:
+          return offsetX = 3;
+      }
+    }
+    return offsetX = 3;
+  };
   Loblurem.prototype.detectBtn = function (element) {
     var btn = $(element).find('[data-loblurem-btn]');
-    if (btn.length > 0) {
-      (function () {
-        var btnArray = [0, 0];
-        for (var i = 0; i < btn.length; i++) {
-          $(btn[i]).css('position', 'absolute');
-          // btnArray.push($(btn[i]).height());
-          btnArray[i] = $(btn[i]).height();
-        }
-
-        var eleHeight = $(element).height();
-
-        var _loop = function _loop(_i2) {
-          var top = void 0,
-              btn0 = btnArray[0],
-              btn1 = btnArray[1];
-          var styles = {
-            top: function (_top) {
-              function top() {
-                return _top.apply(this, arguments);
-              }
-
-              top.toString = function () {
-                return _top.toString();
-              };
-
-              return top;
-            }(function () {
-              if (_i2 == 0) {
-                top = eleHeight - $(element).find('svg').height() / 2 - btn0 / 2 + 'px';
-              }
-              if (_i2 == 1) {
-                top = eleHeight - $(element).find('svg').height() / 2 + btn0 / 2 + 'px';
-              }
-              return top;
-            }),
-            left: '50%',
-            transform: 'translate(-50%, 0)',
-            'z-index': 1,
-            'margin': 0
-          };
-          $(btn[_i2]).css(styles);
-        };
-
-        for (var _i2 = 0; _i2 < btn.length; _i2++) {
-          _loop(_i2);
-        }
-        $(element).css('position', 'relative');
-      })();
+    if (btn.length == 0) return;
+    // (function(){
+    var btnArray = [0, 0];
+    for (var i = 0; i < btn.length; i++) {
+      $(btn[i]).css('position', 'absolute');
+      // btnArray.push($(btn[i]).height());
+      btnArray[i] = $(btn[i]).height();
     }
-    return;
+
+    var eleHeight = $(element).height();
+
+    var _loop = function _loop(_i2) {
+      var top = void 0,
+          btn0 = btnArray[0],
+          btn1 = btnArray[1];
+      var styles = {
+        top: function (_top) {
+          function top() {
+            return _top.apply(this, arguments);
+          }
+
+          top.toString = function () {
+            return _top.toString();
+          };
+
+          return top;
+        }(function () {
+          if (_i2 == 0) top = eleHeight - $(element).find('svg').height() / 2 - btn0 / 2 + 'px';
+          if (_i2 == 1) top = eleHeight - $(element).find('svg').height() / 2 + btn0 / 2 + 'px';
+          return top;
+        }),
+        left: '50%',
+        transform: 'translate(-50%, 0)',
+        'z-index': 1,
+        'margin': 0
+      };
+      $(btn[_i2]).css(styles);
+    };
+
+    for (var _i2 = 0; _i2 < btn.length; _i2++) {
+      _loop(_i2);
+    }
+    $(element).css('position', 'relative');
+
+    // })()
+    // }
+    // return;
   };
   Loblurem.prototype.copyForbidden = function (element) {
     var css = {
@@ -275,32 +298,38 @@ var Loblurem = void 0;
     }
 
     var typeInput = words[words.length - 1]; //fetch last index value
-    if (typeInput == 'p') {
-      type = Loblurem.TEXT_TYPE.PARAGRAPH;
-    } else if (typeInput == 's') {
-      type = Loblurem.TEXT_TYPE.SENTENCE;
-    } else if (typeInput == 'w') {
-      type = Loblurem.TEXT_TYPE.WORD;
-      Loblurem.COMMA = true;
-    } else if (typeInput == 'W') {
-      type = Loblurem.TEXT_TYPE.WORD;
-      Loblurem.COMMA = false;
-    }
+    if (typeInput == null) return;
+    switch (typeInput) {
+      case 'p':
+        type = Loblurem.TEXT_TYPE.PARAGRAPH;
+      case 's':
+        type = Loblurem.TEXT_TYPE.SENTENCE;
+      case 'w':
+        type = Loblurem.TEXT_TYPE.WORD;
+        Loblurem.TEXT_LENGTH = true;
+        Loblurem.COMMA = true;
+      case 'W':
+        type = Loblurem.TEXT_TYPE.WORD;
+        Loblurem.TEXT_LENGTH = false;
+        Loblurem.COMMA = false;
+      default:
+        break;
+    };
 
     loblurem = this.createText(count, type, svgWidth, i, element);
-    if (element) {
-      if (loblurem !== false) {
-        element.innerHTML += loblurem;
-      }
-      this.detectBtn(element);
-      this.copyForbidden(element);
-    }
-    if (element == null) return loblurem;
+    if (element == null && loblurem == null) return;
+    // if (loblurem !== false) {
+    element.innerHTML += loblurem;
+    // }
+    this.detectBtn(element);
+    this.copyForbidden(element);
+    // if (element == null) return loblurem;
   };
   window.addEventListener('DOMContentLoaded', function () {
-    // Select all elements that has a data-boblurem attribute
+    // Select all elements that has a data-loblurem attribute
     var els = document.querySelectorAll('[data-loblurem]'),
         svgWidth = void 0;
+
     function forLoops() {
       for (var i in els) {
         if (els.hasOwnProperty(i)) {
