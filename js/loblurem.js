@@ -106,23 +106,22 @@ let Loblurem;
   }
   // Template literals embedded.
   Loblurem.prototype.template = function (rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO) {
-    let flag_one = '';
-    let flag_two = '';
+    let first_few_rows = last_row = '';
     for (let i = 0; i < rows.length; i++) {
-      if (i < rows.length - 1) {
-        flag_one += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
-        `
-      } else {
-        flag_two = `
+      if(i == rows.length){
+        last_row = `
         <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
+        return;
       }
+      first_few_rows += `
+      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
+      `
     }
     return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgWidth}px" height="${svgHeight + 7}px" display="block">
       <filter id="drop-shadow${idNO}"><feGaussianBlur stdDeviation="${(typeof stdDeviation == "undefined") ? stdDeviation = 4 : stdDeviation}" result="drop-shadow"></feGaussianBlur></filter>
-        ${flag_one}${flag_two}
+        ${first_few_rows}${last_row}
     </svg>
     `
   }
@@ -154,6 +153,7 @@ let Loblurem;
         let sentences = new Array;
         for (let i = 0; i < count; i++) {
           let sentenceLength = this.randomInt(5, 10);
+          console.log(sentenceLength);
           let words = this.createText(sentenceLength, Loblurem.TEXT_TYPE.WORD, svgWidth, element);
           let sentence = words;
           sentences.push(sentence);
