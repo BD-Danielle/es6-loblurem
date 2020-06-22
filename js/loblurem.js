@@ -204,37 +204,37 @@ let Loblurem;
   };
   Loblurem.prototype.detectBtn = function (element) {
     let btn = $(element).find('[data-loblurem-btn]');
-    if (btn.length > 0) {
-      let btnArray = [0, 0];
-      for (let i = 0; i < btn.length; i++) {
-        $(btn[i]).css('position', 'absolute');
-        // btnArray.push($(btn[i]).height());
-        btnArray[i] = $(btn[i]).height();
-      }
-
-      let eleHeight = $(element).height();
-      for (let i = 0; i < btn.length; i++) {
-        let top, btn0 = btnArray[0], btn1 = btnArray[1];
-        let styles = {
-          top: function () {
-            if (i == 0) {
-              top = eleHeight - ($(element).find('svg').height() / 2) - (btn0 / 2) + 'px';
-            }
-            if (i == 1) {
-              top = eleHeight - ($(element).find('svg').height() / 2) + (btn0 / 2) + 'px';
-            }
-            return top;
-          },
-          left: '50%',
-          transform: 'translate(-50%, 0)',
-          'z-index': 1,
-          'margin': 0,
-        };
-        $(btn[i]).css(styles);
-      }
-      $(element).css('position', 'relative');
+    if (btn.length == 0) return;
+    let btnArray = [0, 0];
+    for (let i = 0; i < btn.length; i++) {
+      $(btn[i]).css('position', 'absolute');
+      // btnArray.push($(btn[i]).height());
+      btnArray[i] = $(btn[i]).height();
     }
-    return;
+    
+    let eleHeight = $(element).height();
+    for (let i = 0; i < btn.length; i++) {
+      let top, btn0 = btnArray[0], btn1 = btnArray[1];
+      let styles = {
+        top: function () {
+          if (i == 0) {
+            top = eleHeight - ($(element).find('svg').height() / 2) - (btn0 / 2) + 'px';
+          }
+          if (i == 1) {
+            top = eleHeight - ($(element).find('svg').height() / 2) + (btn0 / 2) + 'px';
+          }
+          return top;
+        },
+        left: '50%',
+        transform: 'translate(-50%, 0)',
+        'z-index': 1,
+        'margin': 0,
+      };
+      $(btn[i]).css(styles);
+    }
+    $(element).css('position', 'relative');
+    // }
+    // return;
   };
   Loblurem.prototype.copyForbidden = function (element) {
     let css = {
