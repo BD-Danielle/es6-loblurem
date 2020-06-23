@@ -117,7 +117,11 @@ let Loblurem;
         last_row = `
         <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
+        return;
       }
+      first_few_rows += `
+      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
+      `
     }
     return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgWidth}px" height="${svgHeight + 7}px" display="block">
