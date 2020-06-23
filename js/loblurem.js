@@ -290,17 +290,19 @@ let Loblurem;
     switch (typeInput) {
       case 'p':
         type = Loblurem.TEXT_TYPE.PARAGRAPH;
+        break;
       case 's':
         type = Loblurem.TEXT_TYPE.SENTENCE;
+        break;
       case 'w':
         type = Loblurem.TEXT_TYPE.WORD;
         Loblurem.TEXT_LENGTH = true;
         Loblurem.COMMA = true;
+        break;
       case 'W':
         type = Loblurem.TEXT_TYPE.WORD;
         Loblurem.TEXT_LENGTH = false;
         Loblurem.COMMA = false;
-      default:
         break;
     };
 
