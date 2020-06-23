@@ -314,8 +314,7 @@ let Loblurem;
   };
   window.addEventListener('DOMContentLoaded', function () {
     // Select all elements that has a data-loblurem attribute
-    let els = document.querySelectorAll('[data-loblurem]'),
-      svgWidth;
+    let els = document.querySelectorAll('[data-loblurem]'), svgWidth;
 
     function forLoops() {
       for (let i in els) {
