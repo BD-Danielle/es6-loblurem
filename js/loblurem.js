@@ -230,7 +230,7 @@ let Loblurem;
   Loblurem.prototype.detectBtn = function (element) {
     let btn = $(element).find('[data-loblurem-btn]');
     if (btn.length == 0) return;
-    // (function(){
+
     let btnArray = [0, 0];
     for (let i = 0; i < btn.length; i++) {
       $(btn[i]).css('position', 'absolute');
@@ -256,11 +256,8 @@ let Loblurem;
       $(btn[i]).css(styles);
     }
     $(element).css('position', 'relative');
-
-    // })()
-    // }
-    // return;
   };
+  
   Loblurem.prototype.copyForbidden = function (element) {
     let css = {
       '-webkit-user-select': 'none',
