@@ -17,11 +17,10 @@ let Loblurem;
   //Create a class named Loblurem and constructor
   Loblurem = function () {
     //Default values.
-    // this.type = null;
     this.query = null;
     this.data = null;
   };
-  //Static letiables
+  //Static variables
   Loblurem.COMMA;
   Loblurem.TEXT_LENGTH;
   Loblurem.TEXT = 2;
@@ -30,7 +29,10 @@ let Loblurem;
     SENTENCE: 2,
     WORD: 3
   }
-  //Words to create blurry text.
+  // Release module to window
+  window.Loblurem = Loblurem;
+
+  //Words list.
   Loblurem.WORDS = [
     '心', '戶', '手', '文', '斗', '斤', '方', '日', '月', '木', //4
     '令', '北', '本', '以', '主', '充', '半', '失', '巧', '平', //5
@@ -42,10 +44,12 @@ let Loblurem;
     '傻', '勢', '亂', '傷', '圓', '傲', '照', '滄', '溺', '準', //13
     '境', '厭', '像', '夢', '奪', '摘', '實', '寧', '管', '種', //14
     '褪', '選', '隨', '憑', '導', '憾', '奮', '擋', '曉', '暸', //16
-    '懷', '穩', '曠', '邊', '難', '願', '關', '壞', '爆', '攏' //19
+    '懷', '穩', '曠', '邊', '難', '願', '關', '壞', '爆', '攏'  //19
   ];
-
+  // Punches list
   Loblurem.PUNCH = ["，", "。", "？", "！"];
+
+  // 
   Loblurem.WIDTH = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   // Random integer method.
   Loblurem.prototype.randomInt = function (min, max) {
@@ -66,7 +70,6 @@ let Loblurem;
     range = this.shuffle(Array.apply(null, Array(range[range.length - 1] - range[0] + 1)).map(function (_, i) {
       return i + range[0];
     }));
-    // console.log(range);
     while (count > 0) {
       range.reduce((accumulator, currentValue, currentIndex, array) => {
         if (accumulator <= 0) {
@@ -74,6 +77,7 @@ let Loblurem;
           return;
         } else {
           rangeArray.push(currentValue);
+          // console.log(rangeArray);
           count = accumulator - currentValue;
           mod = accumulator;
           return count;
@@ -81,12 +85,10 @@ let Loblurem;
       }, count);
     }
     // console.log('after ' + count);
-
-    rangeArray.splice(rangeArray.length - 1, 1, mod); // [12, 11, 10, 9, 8, 7, 6, 12, 11, 10, 4]
     // console.log('before ' + rangeArray);
-    rangeArray = this.customSplice(rangeArray, 7);
-    rangeArray = this.shuffle(rangeArray);
+    rangeArray.splice(rangeArray.length - 1, 1, mod); // [12, 11, 10, 9, 8, 7, 6, 12, 11, 10, 4]
     // console.log('after ' + rangeArray);
+    rangeArray = this.shuffle(this.customSplice(rangeArray, 7));
     if (!comma) return;
 
     rangeArray.reduce((accumulator, currentValue, currentIndex, array) => {
@@ -111,17 +113,13 @@ let Loblurem;
     for (let i = 0; i < rows.length; i++) {
       if (i < rows.length - 1) {
         first_few_rows += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${textLength == false ? 0 : svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${textLength ? svgWidth - 10 : 0}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
       } else {
         last_row = `
         <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
         `
-        return;
       }
-      first_few_rows += `
-      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${fontSize}px" x="3px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${letterSpacing}px" textLength="${svgWidth - 10}" font-size="${fontSize}px" filter="url(#drop-shadow)" fill="${fontColor}">${rows[i]}</text>
-      `
     }
     return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgWidth}px" height="${svgHeight + 7}px" display="block">
@@ -153,7 +151,7 @@ let Loblurem;
           console.log(paragraph);
         }
         return paragraphs.join('');
-        //sentences are loads of words.
+      //sentences are loads of words.
       case Loblurem.TEXT_TYPE.SENTENCE:
         let sentences = new Array;
         for (let i = 0; i < count; i++) {
@@ -164,7 +162,7 @@ let Loblurem;
           sentences.push(sentence);
         }
         return sentences.join('');
-        //words are words
+      //words are words
       case Loblurem.TEXT_TYPE.WORD:
         let strings;
         if (element.hasAttribute('data-loblurem-plaintext') && element.getAttribute('data-loblurem-plaintext').length > 0) {
@@ -204,9 +202,7 @@ let Loblurem;
         let svgHeight = fontSize * rows.length + lineSpacing * (rows.length == 1 ? 1 : rows.length - 1);
         let offsetX = this.display(element, count, svgWidth, fontSize, letterSpacing);
         let textLength = Loblurem.TEXT_LENGTH;
-        console.log(textLength);
         let result = this.template(rows, svgWidth, svgHeight, fontSize, fontColor, letterSpacing, stdDeviation, idNO, offsetX, textLength);
-
         return result;
     }
   };
@@ -229,7 +225,6 @@ let Loblurem;
           return offsetX = 3;
       }
     }
-    return offsetX = 3;
   };
   Loblurem.prototype.detectBtn = function (element) {
     let btn = $(element).find('[data-loblurem-btn]');
@@ -261,7 +256,7 @@ let Loblurem;
     }
     $(element).css('position', 'relative');
   };
-  
+
   Loblurem.prototype.copyForbidden = function (element) {
     let css = {
       '-webkit-user-select': 'none',

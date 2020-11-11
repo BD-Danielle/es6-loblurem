@@ -1,9 +1,3 @@
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /*
  * Loblurem 1.0
  * Loblurem plugin for generating blurry text
@@ -19,85 +13,68 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 // (function ($, window, document) {
 
-// Create a class 
-var Loblurem = function () {
-  // Words list
-  function Loblurem(selector) {
-    _classCallCheck(this, Loblurem);
-
-    this.rangeLength = [7, 13];
-    this.wordsList = ['心', '戶', '手', '文', '斗', '斤', '方', '日', '月', '木', //4
-    '令', '北', '本', '以', '主', '充', '半', '失', '巧', '平', //5
-    '在', '回', '休', '交', '至', '再', '光', '先', '全', '共', //6
-    '邱', '附', '怖', '長', '使', '其', '非', '並', '刻', '取', //8
-    '既', '洋', '拜', '面', '促', '前', '飛', '亮', '信', '香', //9
-    '班', '借', '家', '勉', '冠', '英', '苦', '為', '段', '派', //10
-    '荷', '推', '區', '停', '假', '動', '健', '夠', '問', '將', //11
-    '傻', '勢', '亂', '傷', '圓', '傲', '照', '滄', '溺', '準', //13
-    '境', '厭', '像', '夢', '奪', '摘', '實', '寧', '管', '種', //14
-    '褪', '選', '隨', '憑', '導', '憾', '奮', '擋', '曉', '暸', //16
-    '懷', '穩', '曠', '邊', '難', '願', '關', '壞', '爆', '攏' //19
+  // Create a class 
+  class Loblurem {
+    svgWidth;
+    hasMark;
+    isSentence;
+    // **********Static variables********** //
+    rangeLength = [7, 13];
+      // Words list
+    wordsList = [
+      '心', '戶', '手', '文', '斗', '斤', '方', '日', '月', '木', //4
+      '令', '北', '本', '以', '主', '充', '半', '失', '巧', '平', //5
+      '在', '回', '休', '交', '至', '再', '光', '先', '全', '共', //6
+      '邱', '附', '怖', '長', '使', '其', '非', '並', '刻', '取', //8
+      '既', '洋', '拜', '面', '促', '前', '飛', '亮', '信', '香', //9
+      '班', '借', '家', '勉', '冠', '英', '苦', '為', '段', '派', //10
+      '荷', '推', '區', '停', '假', '動', '健', '夠', '問', '將', //11
+      '傻', '勢', '亂', '傷', '圓', '傲', '照', '滄', '溺', '準', //13
+      '境', '厭', '像', '夢', '奪', '摘', '實', '寧', '管', '種', //14
+      '褪', '選', '隨', '憑', '導', '憾', '奮', '擋', '曉', '暸', //16
+      '懷', '穩', '曠', '邊', '難', '願', '關', '壞', '爆', '攏'  //19
     ];
-    this.marks = ["，", "？", "！", "、", "。"];
-
-    // Default values 
-    var dom = Array.prototype.slice.call(document.querySelectorAll(selector));
-    var len = dom ? dom.length : 0;
-    for (var i = 0; i < len; i++) {
-      this[i] = dom[i];
-      this.element = this[i];
-      this.svgWidth = this.element.offsetWidth || this.element.parentElement.offsetWidth;
-      this.split = this.element.getAttribute('data-loblurem').split('/');
-      this.isSentence = this.hasMark = this.split[0][this.split[0].length - 1] == 'w' ? true : false;
-      this.options = {
-        'count': parseInt(this.split[0]),
-        'fontSize': parseInt(this.split[1]),
-        'lineHeight': parseInt(this.split[2]),
-        'color': this.split[3],
-        'letterSpacing': parseInt(this.split[4]),
-        'blur': parseInt(typeof this.split[5] == 'undefined' ? 4 : this.split[5])
-      };
-      this.generateLoblurem(i);
+      // Punches list
+    marks = ["，", "？", "！", "、", "。"];
+    constructor(selector) {
+      // Default values 
+      var dom = Array.prototype.slice.call(document.querySelectorAll(selector));
+      var len = dom ? dom.length : 0;
+      for(var i=0; i < len; i++){
+        this[i] = dom[i];
+        this.element = this[i];
+        this.svgWidth = this.element.offsetWidth || this.element.parentElement.offsetWidth;
+        this.split = this.element.getAttribute('data-loblurem').split('/');
+        this.isSentence = this.hasMark = this.split[0][this.split[0].length - 1] == 'w' ? true : false;
+        this.options = {
+          'count': parseInt(this.split[0]),
+          'fontSize': parseInt(this.split[1]),
+          'lineHeight': parseInt(this.split[2]),
+          'color': this.split[3],
+          'letterSpacing': parseInt(this.split[4]),
+          'blur': parseInt(typeof this.split[5] == 'undefined' ? 4 : this.split[5])
+        };
+        this.generateLoblurem(i);
+      }
+      this.listenEvent(dom);
     }
-    this.listenEvent(dom);
-  }
-
-  // Random number
-
-  // Punches list
-
-  // **********Static variables********** //
-
-
-  _createClass(Loblurem, [{
-    key: 'randomNo',
-    value: function randomNo(min, max) {
+    
+    // Random number
+    randomNo(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     // Shuffle array without duplicate elements
-
-  }, {
-    key: 'shuffleAry',
-    value: function shuffleAry(arr) {
+    shuffleAry(arr) {
       for (var i = 0; i < arr.length; i++) {
         var j = Math.floor(Math.random() * (i + 1));
-        var _ref = [arr[j], arr[i]];
-        arr[i] = _ref[0];
-        arr[j] = _ref[1];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
       return arr;
     }
     // Get the rest number to add to another number
-
-  }, {
-    key: 'spliceRest',
-    value: function spliceRest(ary, min) {
-      var theRest = ary.filter(function (ele) {
-        return ele < min;
-      });
-      var theMain = ary.filter(function (ele) {
-        return ele >= min;
-      });
+    spliceRest(ary, min) {
+      var theRest = ary.filter(function (ele) { return ele < min; });
+      var theMain = ary.filter(function (ele) { return ele >= min; });
       theRest.map(function (ele) {
         // Math.min.apply to get min of an array in JavaScript
         var idx = theMain.indexOf(Math.min.apply(null, theMain));
@@ -107,10 +84,7 @@ var Loblurem = function () {
       return theMain;
     }
     // Random sentence length.
-
-  }, {
-    key: 'insertMarks',
-    value: function insertMarks(wordsArray) {
+    insertMarks(wordsArray) {
       var count = this.options.count;
       var mod;
       var rangeAry = [];
@@ -136,35 +110,38 @@ var Loblurem = function () {
 
       rangeAry.splice(rangeAry.length - 1, 1, mod); // [12, 11, 10, 9, 8, 7, 6, 12, 11, 10, 4]
       rangeAry = this.shuffleAry(this.spliceRest(rangeAry, this.rangeLength[0]));
-      if (!this.hasMark) return;
+      if (!this.hasMark)
+        return;
       var _this = this;
       rangeAry.reduce(function (ac, cv, currentIndex, _array) {
-        var target_index = ac + cv >= wordsArray.length ? wordsArray.length - 1 : ac + cv;
+        var target_index = ((ac + cv) >= wordsArray.length) ? wordsArray.length - 1 : (ac + cv);
         wordsArray.splice(target_index, 1, currentIndex + 1 > _this.marks.length ? _this.marks[currentIndex % _this.marks.length] : _this.marks[currentIndex]);
         return ac + cv;
       }, 0);
     }
     // Template structure
-
-  }, {
-    key: 'htmlTemplate',
-    value: function htmlTemplate(rows, svgHeight, offsetX, idNO) {
-      var theFirstFewRows = '',
-          theLastRow = '';
+    htmlTemplate(rows, svgHeight, offsetX, idNO) {
+      var theFirstFewRows = '', theLastRow = '';
       for (var i = 0; i < rows.length; i++) {
         if (i < rows.length - 1) {
-          theFirstFewRows += '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + this.options.fontSize + 'px" x="' + offsetX + 'px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + this.options.letterSpacing + 'px" textLength="' + (this.isSentence ? this.svgWidth - 10 : 0) + '" font-size="' + this.options.fontSize + 'px" filter="url(#drop-shadow)" fill="' + this.options.color + '">' + rows[i] + '</text>\n        ';
+          theFirstFewRows += `
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.isSentence ? this.svgWidth - 10 : 0}" font-size="${this.options.fontSize}px" filter="url(#drop-shadow)" fill="${this.options.color}">${rows[i]}</text>
+        `;
         } else {
-          theLastRow = '\n        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow' + idNO + ')" font-size="' + this.options.fontSize + 'px" x="' + offsetX + 'px" y="' + (parseInt(svgHeight / rows.length) * (i + 1) - 2) + 'px" letter-spacing="' + this.options.letterSpacing + 'px" font-size="' + this.options.fontSize + 'px" filter="url(#drop-shadow)" fill="' + this.options.color + '">' + rows[i] + '</text>\n        ';
+          theLastRow = `
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${idNO})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${parseInt(svgHeight / rows.length) * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" filter="url(#drop-shadow)" fill="${this.options.color}">${rows[i]}</text>
+        `;
         }
       }
-      return '\n    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="' + this.svgWidth + 'px" height="' + (svgHeight + 7) + 'px" display="block">\n      <filter id="drop-shadow' + idNO + '"><feGaussianBlur stdDeviation="' + (typeof this.options.blur == "undefined" ? 4 : this.options.blur) + '" result="drop-shadow"></feGaussianBlur></filter>\n        ' + theFirstFewRows + theLastRow + '\n    </svg>\n    ';
+      return `
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${this.svgWidth}px" height="${svgHeight + 7}px" display="block">
+      <filter id="drop-shadow${idNO}"><feGaussianBlur stdDeviation="${(typeof this.options.blur == "undefined") ? 4 : this.options.blur}" result="drop-shadow"></feGaussianBlur></filter>
+        ${theFirstFewRows}${theLastRow}
+    </svg>
+    `;
     }
     // Text creator method with parameters: how many, what
-
-  }, {
-    key: 'generateTEXT',
-    value: function generateTEXT(idNO) {
+    generateTEXT(idNO) {
       var strings;
       if (this.element.hasAttribute('data-loblurem-plaintext') && this.element.getAttribute('data-loblurem-plaintext').length > 0) {
         strings = this.element.getAttribute('data-loblurem-plaintext');
@@ -205,9 +182,7 @@ var Loblurem = function () {
       var result = this.htmlTemplate(rows, svgHeight, offsetX, idNO);
       return result;
     }
-  }, {
-    key: 'display',
-    value: function display() {
+    display() {
       var display, offsetX;
       if (this.element.hasAttribute('data-loblurem-display') && this.element.getAttribute('data-loblurem-display').length > 0) {
         display = this.element.getAttribute('data-loblurem-display');
@@ -228,15 +203,16 @@ var Loblurem = function () {
       }
       return offsetX;
     }
-  }, {
-    key: 'centerBtn',
-    value: function centerBtn() {
+    centerBtn() {
       var btn = this.element.querySelectorAll('[data-loblurem-btn]');
-      if (!btn) return;
+      if (!btn)
+        return;
       // If there is no 
       var svg = this.element.querySelectorAll('svg');
       for (var j = 0; j < btn.length; j++) {
-        var top = j == 0 ? this.element.offsetHeight - parseInt(svg[0].getAttribute('height')) / 2 - btn[j].offsetHeight / 2 + 'px' : this.element.offsetHeight - parseInt(svg[0].getAttribute('height')) / 2 + btn[j].offsetHeight / 2 + 'px';
+        var top = j == 0 ?
+          this.element.offsetHeight - parseInt(svg[0].getAttribute('height')) / 2 - btn[j].offsetHeight / 2 + 'px' :
+          this.element.offsetHeight - parseInt(svg[0].getAttribute('height')) / 2 + btn[j].offsetHeight / 2 + 'px';
         btn[j].style.position = 'absolute';
         btn[j].style.top = top;
         btn[j].style.left = '50%';
@@ -247,20 +223,13 @@ var Loblurem = function () {
       this.element.style.position = 'relative';
     }
     // Prevent user select blurry words
-
-  }, {
-    key: 'preventCopy',
-    value: function preventCopy() {
+    preventCopy() {
       this.element.style.userSelect = 'none';
     }
-  }, {
-    key: 'removeElement',
-    value: function removeElement() {
+    removeElement(){
       this.element.lastElementChild.remove();
     }
-  }, {
-    key: 'generateLoblurem',
-    value: function generateLoblurem(i) {
+    generateLoblurem(i) {
       if (!this.element.hasAttribute('data-loblurem-plaintext')) this.element.setAttribute('data-loblurem-plaintext', '');
       var loblurem = this.generateTEXT(i);
       if (!loblurem) return;
@@ -268,12 +237,10 @@ var Loblurem = function () {
       this.centerBtn();
       this.preventCopy();
     }
-  }, {
-    key: 'listenEvent',
-    value: function listenEvent(dom) {
+    listenEvent(dom){
       var _this = this;
-      window.addEventListener('resize', function () {
-        for (var i = 0; i < dom.length; i++) {
+      window.addEventListener('resize', function () { 
+        for(var i = 0; i < dom.length; i++){
           _this[i] = dom[i];
           _this.element = _this[i];
           _this.svgWidth = _this.element.offsetWidth || _this.element.parentElement.offsetWidth;
@@ -287,46 +254,48 @@ var Loblurem = function () {
             'letterSpacing': parseInt(_this.split[4]),
             'blur': parseInt(typeof _this.split[5] == 'undefined' ? 4 : _this.split[5])
           };
-          _this.removeElement();_this.generateLoblurem(i);
+          _this.removeElement(); _this.generateLoblurem(i); 
         }
-      });
+      })
     }
-  }]);
+  };
 
-  return Loblurem;
-}();
+  
 
-;
+  
 
-// window.addEventListener('DOMContentLoaded', function () {
-// Select all elements that has a data-loblurem attribute
-// var query = document.querySelectorAll('[data-loblurem]');
-// var length = query.length;
-// function render() {
-//   for (var i = 0; i < length; i++) {
-//     var loblurem = new Loblurem;
-//     var ele = loblurem.element(i);
-//     var this.svgWidth = ele.offsetWidth || ele.parentElement.offsetWidth;
-//     if (!ele.hasAttribute('data-loblurem-plaintext')) ele.setAttribute('data-loblurem-plaintext', '');
 
-//     loblurem.generateLoblurem(this.svgWidth, i);
-//   }
-// };
-// function reRender() {
-//   for(var i = 0; i < length; i++){
-//     query[i].lastElementChild.remove();
-//   }
-//   render();
-// }
 
-// render();
-// });
 
-// Release module to window
-// window.Loblurem = Loblurem;
-// window.Loblurem = function(){ new Loblurem('[data-loblurem]');}
-window.addEventListener('DOMContentLoaded', function () {
-  new Loblurem('[data-loblurem]');
-});
+  // window.addEventListener('DOMContentLoaded', function () {
+    // Select all elements that has a data-loblurem attribute
+    // var query = document.querySelectorAll('[data-loblurem]');
+    // var length = query.length;
+    // function render() {
+    //   for (var i = 0; i < length; i++) {
+    //     var loblurem = new Loblurem;
+    //     var ele = loblurem.element(i);
+    //     var this.svgWidth = ele.offsetWidth || ele.parentElement.offsetWidth;
+    //     if (!ele.hasAttribute('data-loblurem-plaintext')) ele.setAttribute('data-loblurem-plaintext', '');
+
+    //     loblurem.generateLoblurem(this.svgWidth, i);
+    //   }
+    // };
+    // function reRender() {
+    //   for(var i = 0; i < length; i++){
+    //     query[i].lastElementChild.remove();
+    //   }
+    //   render();
+    // }
+    
+    // render();
+  // });
+  
+  // Release module to window
+  // window.Loblurem = Loblurem;
+  // window.Loblurem = function(){ new Loblurem('[data-loblurem]');}
+  window.addEventListener('DOMContentLoaded', function(){ new Loblurem('[data-loblurem]'); })
+  
 
 // })(jQuery, window, document);
+
