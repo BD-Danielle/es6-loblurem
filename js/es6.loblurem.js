@@ -35,15 +35,8 @@ class Loblurem {
   constructor(selector) {
     self_lorem = this;
     this.selector = selector;
-    this.console();
-    // this.rendering();
+    this.rendering();
     // this.onresize();
-  }
-  console(){
-    // console.log(this.generateStr());
-  }
-  get id(){
-    return "id" + Math.random().toString(16).slice(2);
   }
   get styles(){
     return {
@@ -69,6 +62,7 @@ class Loblurem {
     let attributes = this.selector.getAttribute("data-loblurem").split("/");
     return {
       counts: Number.isInteger(parseInt(attributes[0])) ? parseInt(attributes[0]) : attributes[0].length, // Number
+      contents: !Number.isInteger(parseInt(attributes[0])) ? attributes[0].split("") : null,
       fontSize: parseInt(attributes[1]), // Number
       lineHeight: parseInt(attributes[2]), // Number
       color: attributes[3], // String
@@ -89,9 +83,6 @@ class Loblurem {
   }
   get charsPerRow(){
     return Math.floor(this.svgWidth / (this.options.fontSize + this.options.letterSpacing)) - 1;
-  }
-  getContents(){
-    return !Number.isInteger(parseInt(this.options.counts)) ? this.options.counts : this.sortArrText(); // String
   }
   getLineHeight(){
     return this.options.fontSize + this.options.lineHeight;
@@ -132,8 +123,9 @@ class Loblurem {
   sortArrText(){
     let charsPerSentence = this.shuffleArr(this.glueArr());
     let marks = this.shuffleArr(this.marks);
-    charsPerSentence = charsPerSentence.map(c=>this.shuffleArr(this.wordsSample).slice(0, c));
+    charsPerSentence = this.options.contents ? charsPerSentence.map(c=>this.options.contents.slice(0, c)):charsPerSentence.map(c=>this.shuffleArr(this.wordsSample).slice(0, c));
     charsPerSentence.map((c, i, a)=>{
+      if(this.options.contents) return;
       c.splice(-1, 1, marks[Math.floor(Math.random() * marks.length)]);
       if(i == a.length - 1) c.splice(-1, 1, this.comma);
     })
@@ -142,25 +134,27 @@ class Loblurem {
     return charsPerSentence;
   }
   generateStr() {
-    let rowsTemplate = '';
+    let rowsTemplate = "";
     let lineHeight = this.getLineHeight();
     let svgHeight = this.getSvgHeight();
     let offsetX = this.getOffsetX();
     let rows = this.sortArrText();
+    let index;
     rows.forEach((c, i, a)=>{
+      index = i;
       rowsTemplate += `
       <text kerning="auto" font-family="Microsoft JhengHei" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
-      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${i})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
       `; 
-      if(i==(a.length-1)){
+      if(i==a.length-1){
         rowsTemplate += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${i})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
         `
       }
     })
     return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${this.svgWidth}px" height="${svgHeight+7}px" display="block">
-      <filter id="drop-shadow${this.id}"><feGaussianBlur stdDeviation="${this.options.blur}" result="drop-shadow"></feGaussianBlur></filter>
+      <filter id="drop-shadow${index}"><feGaussianBlur stdDeviation="${this.options.blur}" result="drop-shadow"></feGaussianBlur></filter>
         ${rowsTemplate}
     </svg>
     `;
@@ -168,7 +162,7 @@ class Loblurem {
 
   
   getOffsetX() {
-    let offsetX = 3;
+    let offsetX;
     switch (this.getDisplay) {
       case "middle":
         offsetX = this.svgWidth / 2 - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) / 2;
@@ -182,10 +176,10 @@ class Loblurem {
     return offsetX;
   }
   centreBtn() {
-    if (!this.buttons) return;
+    if (this.buttons.length==0) return;
     let lineHeight = this.getLineHeight();
     for (let key in this.styles){this.selector.style[key] = this.styles[key]};
-    buttons.forEach(c => {
+    this.buttons.forEach(c => {
       let top = this.selector.offsetHeight - lineHeight / 2 - c.offsetHeight / 2 + "px" 
       c.style.top = top;
     });
