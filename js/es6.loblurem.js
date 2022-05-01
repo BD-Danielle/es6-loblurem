@@ -3,7 +3,7 @@
  * Loblurem 1.1
  * Loblurem plugin for generating blurry text
  * YILING CHEN.
- * Copyright 2019, MIT License
+ * Copyright 2022, MIT License
  * How to use it:
  * see README.md
  * ========================================================================
@@ -31,12 +31,13 @@ class Loblurem {
   // Punches list
   marks = ["，", "？", "！", "、", "。"];
   comma = "。";
+  id = Math.random().toString(16).slice(2);
   // constructor
   constructor(selector) {
     self_lorem = this;
     this.selector = selector;
     this.rendering();
-    // this.onresize();
+    this.onresize();
   }
   get styles(){
     return {
@@ -53,7 +54,7 @@ class Loblurem {
     }
   }
   get buttons(){
-    return this.selector.querySelectorAll("data-loblurem-btn");
+    return this.selector.querySelectorAll("[data-loblurem-btn]");
   }
   get getDisplay(){
     return this.selector.getAttribute("data-loblurem-display");
@@ -62,7 +63,7 @@ class Loblurem {
     let attributes = this.selector.getAttribute("data-loblurem").split("/");
     return {
       counts: Number.isInteger(parseInt(attributes[0])) ? parseInt(attributes[0]) : attributes[0].length, // Number
-      contents: !Number.isInteger(parseInt(attributes[0])) ? attributes[0].split("") : null,
+      contents: !Number.isInteger(parseInt(attributes[0])) ? attributes[0].split("") : [],
       fontSize: parseInt(attributes[1]), // Number
       lineHeight: parseInt(attributes[2]), // Number
       color: attributes[3], // String
@@ -84,11 +85,8 @@ class Loblurem {
   get charsPerRow(){
     return Math.floor(this.svgWidth / (this.options.fontSize + this.options.letterSpacing)) - 1;
   }
-  getLineHeight(){
+  get lineHeight(){
     return this.options.fontSize + this.options.lineHeight;
-  }
-  getSvgHeight(){
-    return (this.options.fontSize + this.options.letterSpacing) * this.sortArrText().length;
   }
   randomizeNum(a, z) {
     return Math.floor(Math.random() * (z - a + 1)) + a;
@@ -98,9 +96,10 @@ class Loblurem {
   }
   glueArr(){
     let counts = this.options.counts;
+    let charsPerSentence = Object.assign([], this.charsPerSentence);
     let charsPerSentence_ = [];
     while(counts > 0) {
-      this.charsPerSentence.reduce((p, c, i, a)=> {
+      charsPerSentence.reduce((p, c, i, a)=> {
         if (p <= 0) {
           a.splice(0); // eject early
         } else {
@@ -123,38 +122,38 @@ class Loblurem {
   sortArrText(){
     let charsPerSentence = this.shuffleArr(this.glueArr());
     let marks = this.shuffleArr(this.marks);
-    charsPerSentence = this.options.contents ? charsPerSentence.map(c=>this.options.contents.slice(0, c)):charsPerSentence.map(c=>this.shuffleArr(this.wordsSample).slice(0, c));
-    charsPerSentence.map((c, i, a)=>{
-      if(this.options.contents) return;
-      c.splice(-1, 1, marks[Math.floor(Math.random() * marks.length)]);
-      if(i == a.length - 1) c.splice(-1, 1, this.comma);
-    })
+    let contents = Object.assign([], this.options.contents);
+    charsPerSentence = contents.length ? charsPerSentence.map(c=>contents.splice(0, c)):charsPerSentence.map(c=>this.shuffleArr(this.wordsSample).slice(0, c));
+    if(!this.options.contents.length){
+      charsPerSentence.map((c, i, a)=>{
+        c.splice(-1, 1, marks[Math.floor(Math.random() * marks.length)]);
+        if(i == a.length - 1) c.splice(-1, 1, this.comma);
+      })
+    };
     charsPerSentence = charsPerSentence.flat();
     charsPerSentence = charsPerSentence.map((c, i, a)=>a.slice(i * this.charsPerRow, i * this.charsPerRow + this.charsPerRow)).filter(c=>c.length);
     return charsPerSentence;
   }
   generateStr() {
     let rowsTemplate = "";
-    let lineHeight = this.getLineHeight();
-    let svgHeight = this.getSvgHeight();
     let offsetX = this.getOffsetX();
     let rows = this.sortArrText();
-    let index;
+    let svgHeight = this.lineHeight * rows.length;
+    // <text kerning="auto" font-family="Microsoft JhengHei" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
     rows.forEach((c, i, a)=>{
-      index = i;
-      rowsTemplate += `
-      <text kerning="auto" font-family="Microsoft JhengHei" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
-      <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${i})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
-      `; 
       if(i==a.length-1){
         rowsTemplate += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${i})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${lineHeight*(i+1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight*(i+1)-2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
         `
+      }else{
+        rowsTemplate += `
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight*(i+1)-2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+        `; 
       }
     })
     return `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${this.svgWidth}px" height="${svgHeight+7}px" display="block">
-      <filter id="drop-shadow${index}"><feGaussianBlur stdDeviation="${this.options.blur}" result="drop-shadow"></feGaussianBlur></filter>
+      <filter id="drop-shadow${this.id}"><feGaussianBlur stdDeviation="${this.options.blur}"></feGaussianBlur></filter>
         ${rowsTemplate}
     </svg>
     `;
@@ -177,11 +176,16 @@ class Loblurem {
   }
   centreBtn() {
     if (this.buttons.length==0) return;
-    let lineHeight = this.getLineHeight();
-    for (let key in this.styles){this.selector.style[key] = this.styles[key]};
-    this.buttons.forEach(c => {
-      let top = this.selector.offsetHeight - lineHeight / 2 - c.offsetHeight / 2 + "px" 
+    //for(let key in this.styles){this.selector.style[key] = this.styles[key]};
+    let svgHeight = this.lineHeight * this.sortArrText().length;
+    this.buttons.forEach((c, i)=>{
+      let top = this.selector.offsetHeight-(svgHeight+c.offsetHeight)/2 + "px"; 
       c.style.top = top;
+      c.style.position = "absolute";
+      c.style.left = "50%";
+      c.style.transform = "translate(-50%, 0)";
+      c.style.zIndex = 1;
+      c.style.margin = 0;
     });
     this.selector.style.position = "relative";
   }
