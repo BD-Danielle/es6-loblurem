@@ -175,19 +175,19 @@ class Loblurem {
     return offsetX;
   }
   centreBtn() {
-    if (this.buttons.length==0) return;
-    //for(let key in this.styles){this.selector.style[key] = this.styles[key]};
+    if (!this.buttons.length) return;
+    this.selector.style.position = "relative";
     let svgHeight = this.lineHeight * this.sortArrText().length;
+    let offsetTop = this.selector.offsetHeight-svgHeight;
+    console.log('offsetTop: ', offsetTop);
     this.buttons.forEach((c, i)=>{
-      let top = this.selector.offsetHeight-(svgHeight+c.offsetHeight)/2 + "px"; 
-      c.style.top = top;
+      c.style.top = offsetTop+(svgHeight-c.offsetHeight)/2 + "px";
       c.style.position = "absolute";
       c.style.left = "50%";
       c.style.transform = "translate(-50%, 0)";
       c.style.zIndex = 1;
       c.style.margin = 0;
     });
-    this.selector.style.position = "relative";
   }
   removeElement() {
     this.selector.lastElementChild.remove();
@@ -204,8 +204,8 @@ class Loblurem {
     })
   }
 };
-window.addEventListener('DOMContentLoaded', function () {
-  let selectors = document.querySelectorAll('[data-loblurem]');
+window.addEventListener("DOMContentLoaded", function () {
+  let selectors = document.querySelectorAll("[data-loblurem]");
   selectors.forEach(c=>new Loblurem(c));
 })
 
