@@ -1,19 +1,54 @@
-# Babel setup
-### 第一步：在開發目錄下，初始化npm，並輸入相關屬性值，例如創建者署名
+# Loblurem
+## 羅伯崙套件，可進行區塊性模糊字渲染，其渲染的文字內容可隨機 (預設值)，或依使用者喜好。
+
+## Getting Started 開始使用：
+### 詳情請參照下面敍述
+
+## Prerequisites 必要條件：
+### loblurem 不依賴原生jQuery，引用之前不需先載入jQuery
+ ```
+  <script src="./js/es6.loblurem.js"></script>
+ ```
+
+## Configuration 參數配置：
+### 在需模糊的區域，加載屬性節點 data-loblurem，其屬性值可依使用者需求配置，其順序依次為 - > 字數(或自行輸文本)/字型大小/行間間距/字型顏色/字元間距/模糊程度預設為值4
 ```
-npm init
+  <p class="pq_TXT3" data-loblurem="157w/20/10/rgb(87, 132, 84)/5"> 歷經幾段感情之後遇見了他，我們一點都不速配，身高、年齡、收入...
+    <span>
+      <a data-loblurem-btn class="pq_BT_FREE1" href="#">立即測算</a>
+      <a data-loblurem-btn href="">付費後將提供本單元整頁分析內容</a>
+    </span>
+  </p>
 ```
-### 第二步：touch一個副檔名為babelrc的檔案，並建立內容如下：
+### 模糊字渲染預設值為隨機，如需客製需增加自定義的文檔，範例如下：
 ```
-{
-  "presets": ["es2015", "stage-2"]
-}
+  <div class="pq_RETEXT" data-loblurem="大弦嘈嘈如急雨，小弦切切如私語。嘈嘈切切錯雜彈，大珠小珠落玉盤。間關鶯語花底滑，幽咽泉流冰下難。冰泉冷澀弦疑絕，疑絕不通聲暫歇。別有幽愁暗恨生，此時無聲勝有聲。/20/10/#c93030/0"
+  </div>
 ```
-### 第三步：安裝所需的套件，無需安裝至 --save-dev
+![範例圖檔](/images/loblurem/examples1.png?raw=true "Title")
+
+### 模糊字定位預設值為靠左，如需客製需增加 data-loblurem-display 屬性節點，和屬性值，不適用大區塊段落文字，範例如下：
 ```
-npm i babel-cli babel-register babel-preset-es2015 babel-preset-stage-2 -D
+  <div class="pq_TWO_COM">
+    <div class="pq_REPIC" data-loblurem="我反中，你怎樣/20/10/#c430c9/5" data-loblurem-display="right"></div>
+  </div>
 ```
-### 第四步：babel你指定的檔案，並輸出至指定位置：
+* data-loblurem-display: left; (預設值)
+* data-loblurem-display: middle;
+* data-loblurem-display: right (不適用大區塊段落文字);
+  
+![範例圖檔](/images/loblurem/examples2.png?raw=true "Title")
+![範例圖檔](/images/loblurem/examples3.png?raw=true "Title")
+
+### 模糊區段的按鈕可以多個並排，但需逐件增加data-loblurem-btn，並置中，範例如下：
 ```
-babel js/es6.loblurem.js -o babel/es6.loblurem.babel.js
+<p class="pq_TXT3" data-loblurem="貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！/20/10/rgb(87, 132, 84)/5">
+  <span>
+    <a data-loblurem-btn class="pq_BT_FREE1" href="#">1.立即測算</a>
+    <a data-loblurem-btn href="">2.付費後將提供</a>
+    <a data-loblurem-btn href="">3.本單元整頁</a>
+    <a data-loblurem-btn href="">4.分析內容</a>
+  </span>
+</p>
 ```
+![範例圖檔](/images/loblurem/examples4.png?raw=true "Title")

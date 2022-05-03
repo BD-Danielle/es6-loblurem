@@ -38,20 +38,6 @@ class Loblurem {
     this.selector = selector;
     this.rendering();
   }
-  get styles(){
-    return {
-      position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, 0)",
-      zIndex: 1,
-      margin: 0
-    }
-  }
-  set styles(value){
-    if(value){
-      for (var key in value) {
-        this.selector.style[key] = value[key];
-      }
-    }
-  }
   get buttons(){
     return this.selector.querySelectorAll("[data-loblurem-btn]");
   }
