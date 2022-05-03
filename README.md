@@ -11,9 +11,9 @@ npm init
 ```
 ### 第三步：安裝所需的套件，無需安裝至 --save-dev
 ```
-npm install babel-cli babel-register babel-preset-es2015 babel-preset-stage-2
+npm i babel-cli babel-register babel-preset-es2015 babel-preset-stage-2 -D
 ```
 ### 第四步：babel你指定的檔案，並輸出至指定位置：
 ```
-babel peekaboo.js -o babel/peekaboo.babel.js
+babel js/es6.loblurem.js -o babel/es6.loblurem.babel.js
 ```
