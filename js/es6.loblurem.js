@@ -37,7 +37,6 @@ class Loblurem {
     self_lorem = this;
     this.selector = selector;
     this.rendering();
-    this.onresize();
   }
   get styles(){
     return {
@@ -100,13 +99,10 @@ class Loblurem {
     let charsPerSentence_ = [];
     while(counts > 0) {
       charsPerSentence.reduce((p, c, i, a)=> {
-        if (p <= 0) {
-          a.splice(0); // eject early
-        } else {
-          charsPerSentence_.push(c);
-          counts = p - c;
-          return counts;
-        }
+        if (p <= 0) a.splice(0); // eject early
+        charsPerSentence_.push(c);
+        counts = p - c;
+        return counts;
       }, counts);
     }
     charsPerSentence_.sort((a, z) => z - a); // z to a
@@ -178,10 +174,18 @@ class Loblurem {
     if (!this.buttons.length) return;
     this.selector.style.position = "relative";
     let svgHeight = this.lineHeight * this.sortArrText().length;
-    let offsetTop = this.selector.offsetHeight-svgHeight;
-    console.log('offsetTop: ', offsetTop);
+    let offsetTop = this.selector.offsetHeight-svgHeight; //660
+    let offsetHeight = [...this.buttons].map(c=>c.offsetHeight);
+    let iterateOffsetHeight = offsetHeight.reduce((p, c)=>{
+      if(!p.length)p.push(c);
+      let next = p[p.length-1];
+      p.push(next+c);
+      return p;
+    }, [0]);
+    console.log('iterateOffsetHeight: ', iterateOffsetHeight);//[0, 55, 84, 113, 142] iphone12 pro
+    let baseline = offsetTop+(svgHeight-this.buttons[0].offsetHeight)/2;
     this.buttons.forEach((c, i)=>{
-      c.style.top = offsetTop+(svgHeight-c.offsetHeight)/2 + "px";
+      c.style.top = baseline+iterateOffsetHeight[i] + "px";
       c.style.position = "absolute";
       c.style.left = "50%";
       c.style.transform = "translate(-50%, 0)";
@@ -189,23 +193,20 @@ class Loblurem {
       c.style.margin = 0;
     });
   }
-  removeElement() {
-    this.selector.lastElementChild.remove();
-  }
   rendering() {
     this.selector.style.userSelect = "none";
     this.selector.innerHTML += this.generateStr();
     this.centreBtn();
   }
-  onresize(){
-    window.addEventListener("resize", function(){
-      self_lorem.removeElement();
-      self_lorem.rendering();
-    })
-  }
 };
 window.addEventListener("DOMContentLoaded", function () {
   let selectors = document.querySelectorAll("[data-loblurem]");
   selectors.forEach(c=>new Loblurem(c));
+  window.addEventListener("resize", function(){
+    selectors.forEach(c=>{
+      c.lastElementChild.remove();
+      new Loblurem(c);
+    });
+  })
 })
 
