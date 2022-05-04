@@ -111,6 +111,7 @@ var Loblurem = function () {
         });
       };
       charsPerSentence = charsPerSentence.flat();
+      this.selector.setAttribute("data-loblurem", charsPerSentence.join("") + '/' + this.options.fontSize + '/' + this.options.lineHeight + '/' + this.options.color + '/' + this.options.letterSpacing + '/' + this.options.blur);
       charsPerSentence = charsPerSentence.map(function (c, i, a) {
         return a.slice(i * _this.charsPerRow, i * _this.charsPerRow + _this.charsPerRow);
       }).filter(function (c) {
@@ -149,7 +150,7 @@ var Loblurem = function () {
           offsetX = this.svgWidth - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) - 3;
           break;
         default:
-          offsetX = 3;
+          offsetX = 2.5;
       }
       return offsetX;
     }
@@ -188,22 +189,6 @@ var Loblurem = function () {
       this.centreBtn();
     }
   }, {
-    key: 'styles',
-    get: function get() {
-      return {
-        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, 0)",
-        zIndex: 1,
-        margin: 0
-      };
-    },
-    set: function set(value) {
-      if (value) {
-        for (var key in value) {
-          this.selector.style[key] = value[key];
-        }
-      }
-    }
-  }, {
     key: 'buttons',
     get: function get() {
       return this.selector.querySelectorAll("[data-loblurem-btn]");
@@ -226,13 +211,6 @@ var Loblurem = function () {
         letterSpacing: parseInt(attributes[4]), // Number
         blur: parseInt(typeof attributes[5] == "undefined" ? 4 : attributes[5]) // Number
       };
-    },
-    set: function set(value) {
-      if (value) {
-        for (var key in value) {
-          this.options[key] = value[key];
-        }
-      }
     }
   }, {
     key: 'svgWidth',
