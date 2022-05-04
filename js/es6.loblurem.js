@@ -57,14 +57,6 @@ class Loblurem {
       blur: parseInt(typeof attributes[5] == "undefined" ? 4 : attributes[5]), // Number
     }
   }
-  
-  set options(value){
-    if(value){
-      for (var key in value) {
-        this.options[key] = value[key];
-      }
-    }
-  }
   get svgWidth(){
     return this.selector.offsetWidth || this.selector.parentElement.offsetWidth;
   }
