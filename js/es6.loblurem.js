@@ -175,6 +175,9 @@ class Loblurem {
   }
   rendering() {
     this.selector.style.userSelect = "none";
+    this.selector.style.MozUserSelect = "none";
+    this.selector.style.WebkitUserSelect = "none";
+    this.selector.style.MsUserSelect = "none";
     this.selector.innerHTML += this.generateStr();
     this.centreBtn();
   }
