@@ -1,9 +1,6 @@
 # Loblurem
 ## 羅伯崙套件，可進行區塊性模糊字渲染，其渲染的文字內容可隨機 (預設值)，或依使用者喜好。
 
-## Getting Started 開始使用：
-### 詳情請參照下面敍述
-
 ## Prerequisites 必要條件：
 ### loblurem 不依賴原生jQuery，引用之前不需先載入jQuery
  ```
@@ -27,7 +24,7 @@
 ```
 ![範例圖檔](/images/loblurem/examples1.png?raw=true "Title")
 
-### 模糊字定位預設值為靠左，如需客製需增加 data-loblurem-display 屬性節點，和屬性值，不適用大區塊段落文字，範例如下：
+### 不適用大區塊段落文字模糊字定位，只適用標題，預設值為靠左，如需客製需增加 data-loblurem-display 屬性節點，和屬性值，範例如下：
 ```
   <div class="pq_TWO_COM">
     <div class="pq_REPIC" data-loblurem="我反中，你怎樣/20/10/#c430c9/5" data-loblurem-display="right"></div>
@@ -40,7 +37,7 @@
 ![範例圖檔](/images/loblurem/examples2.png?raw=true "Title")
 ![範例圖檔](/images/loblurem/examples3.png?raw=true "Title")
 
-### 模糊區段的按鈕可以多個並排，但需逐件增加data-loblurem-btn，並置中，範例如下：
+### 模糊區段的按鈕可以多個並排，但需逐鍵增加data-loblurem-btn，並置中，範例如下：
 ```
 <p class="pq_TXT3" data-loblurem="貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！/20/10/rgb(87, 132, 84)/5">
   <span>

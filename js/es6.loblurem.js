@@ -11,6 +11,7 @@
 
 // Defined "self_lorem" in Global
 let self_lorem;
+
 class Loblurem {
   // **********Static variables********** //
   charsPerSentence = [7, 8, 9, 10, 11, 12, 13];
@@ -113,6 +114,7 @@ class Loblurem {
       })
     };
     charsPerSentence = charsPerSentence.flat();
+    this.selector.setAttribute("data-loblurem", `${charsPerSentence.join("")}/${this.options.fontSize}/${this.options.lineHeight}/${this.options.color}/${this.options.letterSpacing}/${this.options.blur}`);
     charsPerSentence = charsPerSentence.map((c, i, a)=>a.slice(i * this.charsPerRow, i * this.charsPerRow + this.charsPerRow)).filter(c=>c.length);
     return charsPerSentence;
   }
@@ -152,7 +154,7 @@ class Loblurem {
         offsetX = this.svgWidth - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) - 3;
         break;
       default:
-        offsetX = 3;
+        offsetX = 2.5;
     }
     return offsetX;
   }
