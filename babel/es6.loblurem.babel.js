@@ -170,7 +170,7 @@ var Loblurem = function () {
         p.push(next + c);
         return p;
       }, [0]);
-      console.log('iterateOffsetHeight: ', iterateOffsetHeight); //[0, 55, 84, 113, 142] iphone12 pro
+      // console.log('iterateOffsetHeight: ', iterateOffsetHeight);//[0, 55, 84, 113, 142] iphone12 pro
       var baseline = offsetTop + (svgHeight - this.buttons[0].offsetHeight) / 2;
       this.buttons.forEach(function (c, i) {
         c.style.top = baseline + iterateOffsetHeight[i] + "px";
