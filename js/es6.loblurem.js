@@ -1,6 +1,6 @@
 /*
  * ========================================================================
- * Loblurem 1.1
+ * Loblurem 1.2
  * Loblurem plugin for generating blurry text
  * YILING CHEN.
  * Copyright 2022, MIT License
@@ -33,11 +33,13 @@ class Loblurem {
   marks = ["，", "？", "！", "、", "。"];
   comma = "。";
   id = Math.random().toString(16).slice(2);
+  timer = null;
   // constructor
   constructor(selector) {
     self_lorem = this;
     this.selector = selector;
     this.rendering();
+    this.resize();
   }
   get buttons(){
     return this.selector.querySelectorAll("[data-loblurem-btn]");
@@ -173,6 +175,12 @@ class Loblurem {
       c.style.margin = 0;
     });
   }
+  debounce(fn, delay = 200){
+    if(this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      fn();
+    }, delay)
+  }
   rendering() {
     this.selector.style.userSelect = "none";
     this.selector.style.MozUserSelect = "none";
@@ -181,15 +189,26 @@ class Loblurem {
     this.selector.innerHTML += this.generateStr();
     this.centreBtn();
   }
+  resize(){
+    window.addEventListener("resize", () => {
+      if(this.selector.lastElementChild) {
+        this.debounce(()=>{
+          this.selector.lastElementChild.remove();
+          this.selector.innerHTML += this.generateStr();
+          this.centreBtn();
+        });
+      }
+    })
+  }
 };
 window.addEventListener("DOMContentLoaded", function () {
   let selectors = document.querySelectorAll("[data-loblurem]");
   selectors.forEach(c=>new Loblurem(c));
-  window.addEventListener("resize", function(){
-    selectors.forEach(c=>{
-      c.lastElementChild.remove();
-      new Loblurem(c);
-    });
-  })
+  // window.addEventListener("resize", function(){
+  //   selectors.forEach(c=>{
+  //     c.lastElementChild.remove();
+  //     new Loblurem(c);
+  //   });
+  // })
 })
 

@@ -8,7 +8,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /*
  * ========================================================================
- * Loblurem 1.1
+ * Loblurem 1.2
  * Loblurem plugin for generating blurry text
  * YILING CHEN.
  * Copyright 2022, MIT License
@@ -23,7 +23,9 @@ var self_lorem = void 0;
 var Loblurem = function () {
   // constructor
 
-  // Words list
+  // Punches list
+
+  // **********Static variables********** //
   function Loblurem(selector) {
     _classCallCheck(this, Loblurem);
 
@@ -43,14 +45,14 @@ var Loblurem = function () {
     this.marks = ["，", "？", "！", "、", "。"];
     this.comma = "。";
     this.id = Math.random().toString(16).slice(2);
+    this.timer = null;
 
     self_lorem = this;
     this.selector = selector;
     this.rendering();
+    this.resize();
   }
-  // Punches list
-
-  // **********Static variables********** //
+  // Words list
 
 
   _createClass(Loblurem, [{
@@ -182,6 +184,16 @@ var Loblurem = function () {
       });
     }
   }, {
+    key: 'debounce',
+    value: function debounce(fn) {
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
+
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = setTimeout(function () {
+        fn();
+      }, delay);
+    }
+  }, {
     key: 'rendering',
     value: function rendering() {
       this.selector.style.userSelect = "none";
@@ -190,6 +202,21 @@ var Loblurem = function () {
       this.selector.style.MsUserSelect = "none";
       this.selector.innerHTML += this.generateStr();
       this.centreBtn();
+    }
+  }, {
+    key: 'resize',
+    value: function resize() {
+      var _this3 = this;
+
+      window.addEventListener("resize", function () {
+        if (_this3.selector.lastElementChild) {
+          _this3.debounce(function () {
+            _this3.selector.lastElementChild.remove();
+            _this3.selector.innerHTML += _this3.generateStr();
+            _this3.centreBtn();
+          });
+        }
+      });
     }
   }, {
     key: 'buttons',
@@ -241,10 +268,10 @@ window.addEventListener("DOMContentLoaded", function () {
   selectors.forEach(function (c) {
     return new Loblurem(c);
   });
-  window.addEventListener("resize", function () {
-    selectors.forEach(function (c) {
-      c.lastElementChild.remove();
-      new Loblurem(c);
-    });
-  });
+  // window.addEventListener("resize", function(){
+  //   selectors.forEach(c=>{
+  //     c.lastElementChild.remove();
+  //     new Loblurem(c);
+  //   });
+  // })
 });
