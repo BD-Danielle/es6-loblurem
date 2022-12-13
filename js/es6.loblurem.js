@@ -33,7 +33,6 @@ class Loblurem {
   marks = ["，", "？", "！", "、", "。"];
   comma = "。";
   id = Math.random().toString(16).slice(2);
-  timer = null;
   // constructor
   constructor(selector) {
     self_lorem = this;
@@ -77,24 +76,24 @@ class Loblurem {
   glueArr(){
     let counts = this.options.counts;
     let charsPerSentence = Object.assign([], this.charsPerSentence);
-    let charsPerSentence_ = [];
+    let _charsPerSentence = [];
     while(counts > 0) {
       charsPerSentence.reduce((p, c, i, a)=> {
         if (p <= 0) a.splice(0); // eject early
-        charsPerSentence_.push(c);
+        _charsPerSentence.push(c);
         counts = p - c;
         return counts;
       }, counts);
     }
-    charsPerSentence_.sort((a, z) => z - a); // z to a
+    _charsPerSentence.sort((a, z) => z - a); // z to a
     while(counts < 0){
-      for(let i = 0; i < charsPerSentence_.length; i++){
-        charsPerSentence_[i]-=1;
+      for(let i = 0; i < _charsPerSentence.length; i++){
+        _charsPerSentence[i]-=1;
         counts+=1;
         if(counts >=0) break;
       }
     }
-    return charsPerSentence_; // [12, 12, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7]
+    return _charsPerSentence; // [12, 12, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7]
   }
   sortArrText(){
     let charsPerSentence = this.shuffleArr(this.glueArr());
@@ -175,11 +174,18 @@ class Loblurem {
       c.style.margin = 0;
     });
   }
-  debounce(fn, delay = 200){
-    if(this.timer) clearTimeout(this.timer);
-    this.timer = setTimeout(() => {
-      fn();
-    }, delay)
+  throttle(fn, delay = 250){
+    let timer = 0;
+    // let times = 0;
+    return ()=>{
+      let now = Date.now();
+      if(now - timer >= delay){
+        fn.call(this);
+        // times++;
+        // console.log('times++: ', times);
+        timer = now;
+      }
+    }
   }
   rendering() {
     this.selector.style.userSelect = "none";
@@ -190,25 +196,17 @@ class Loblurem {
     this.centreBtn();
   }
   resize(){
-    window.addEventListener("resize", () => {
+    window.addEventListener("scroll", this.throttle(()=> {
       if(this.selector.lastElementChild) {
-        this.debounce(()=>{
-          this.selector.lastElementChild.remove();
-          this.selector.innerHTML += this.generateStr();
-          this.centreBtn();
-        });
+        this.selector.lastElementChild.remove();
+        this.selector.innerHTML += this.generateStr();
+        this.centreBtn();
       }
-    })
+    }))
   }
 };
 window.addEventListener("DOMContentLoaded", function () {
   let selectors = document.querySelectorAll("[data-loblurem]");
   selectors.forEach(c=>new Loblurem(c));
-  // window.addEventListener("resize", function(){
-  //   selectors.forEach(c=>{
-  //     c.lastElementChild.remove();
-  //     new Loblurem(c);
-  //   });
-  // })
 })
 
