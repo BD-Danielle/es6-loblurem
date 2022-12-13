@@ -23,9 +23,7 @@ var self_lorem = void 0;
 var Loblurem = function () {
   // constructor
 
-  // Punches list
-
-  // **********Static variables********** //
+  // Words list
   function Loblurem(selector) {
     _classCallCheck(this, Loblurem);
 
@@ -45,14 +43,15 @@ var Loblurem = function () {
     this.marks = ["，", "？", "！", "、", "。"];
     this.comma = "。";
     this.id = Math.random().toString(16).slice(2);
-    this.timer = null;
 
     self_lorem = this;
     this.selector = selector;
     this.rendering();
     this.resize();
   }
-  // Words list
+  // Punches list
+
+  // **********Static variables********** //
 
 
   _createClass(Loblurem, [{
@@ -72,26 +71,26 @@ var Loblurem = function () {
     value: function glueArr() {
       var counts = this.options.counts;
       var charsPerSentence = Object.assign([], this.charsPerSentence);
-      var charsPerSentence_ = [];
+      var _charsPerSentence = [];
       while (counts > 0) {
         charsPerSentence.reduce(function (p, c, i, a) {
           if (p <= 0) a.splice(0); // eject early
-          charsPerSentence_.push(c);
+          _charsPerSentence.push(c);
           counts = p - c;
           return counts;
         }, counts);
       }
-      charsPerSentence_.sort(function (a, z) {
+      _charsPerSentence.sort(function (a, z) {
         return z - a;
       }); // z to a
       while (counts < 0) {
-        for (var i = 0; i < charsPerSentence_.length; i++) {
-          charsPerSentence_[i] -= 1;
+        for (var i = 0; i < _charsPerSentence.length; i++) {
+          _charsPerSentence[i] -= 1;
           counts += 1;
           if (counts >= 0) break;
         }
       }
-      return charsPerSentence_; // [12, 12, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7]
+      return _charsPerSentence; // [12, 12, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7]
     }
   }, {
     key: 'sortArrText',
@@ -184,14 +183,23 @@ var Loblurem = function () {
       });
     }
   }, {
-    key: 'debounce',
-    value: function debounce(fn) {
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
+    key: 'throttle',
+    value: function throttle(fn) {
+      var _this3 = this;
 
-      if (this.timer) clearTimeout(this.timer);
-      this.timer = setTimeout(function () {
-        fn();
-      }, delay);
+      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
+
+      var timer = 0;
+      // let times = 0;
+      return function () {
+        var now = Date.now();
+        if (now - timer >= delay) {
+          fn.call(_this3);
+          // times++;
+          // console.log('times++: ', times);
+          timer = now;
+        }
+      };
     }
   }, {
     key: 'rendering',
@@ -206,17 +214,15 @@ var Loblurem = function () {
   }, {
     key: 'resize',
     value: function resize() {
-      var _this3 = this;
+      var _this4 = this;
 
-      window.addEventListener("resize", function () {
-        if (_this3.selector.lastElementChild) {
-          _this3.debounce(function () {
-            _this3.selector.lastElementChild.remove();
-            _this3.selector.innerHTML += _this3.generateStr();
-            _this3.centreBtn();
-          });
+      window.addEventListener("scroll", this.throttle(function () {
+        if (_this4.selector.lastElementChild) {
+          _this4.selector.lastElementChild.remove();
+          _this4.selector.innerHTML += _this4.generateStr();
+          _this4.centreBtn();
         }
-      });
+      }));
     }
   }, {
     key: 'buttons',
@@ -268,10 +274,4 @@ window.addEventListener("DOMContentLoaded", function () {
   selectors.forEach(function (c) {
     return new Loblurem(c);
   });
-  // window.addEventListener("resize", function(){
-  //   selectors.forEach(c=>{
-  //     c.lastElementChild.remove();
-  //     new Loblurem(c);
-  //   });
-  // })
 });
