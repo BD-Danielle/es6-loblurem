@@ -10,7 +10,7 @@
  */
 
 // Defined "self_lorem" in Global
-let self_lorem;
+var self_lorem;
 
 class Loblurem {
   // **********Static variables********** //
