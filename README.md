@@ -1,51 +1,64 @@
-# Loblurem
-## 羅伯崙套件，可進行區塊性模糊字渲染，其渲染的文字內容可隨機 (預設值)，或依使用者喜好。
+# Loblurem 1.2.1
 
-## Prerequisites 必要條件：
-### loblurem 不依賴原生jQuery，引用之前不需先載入jQuery
- ```
-  <script src="./js/es6.loblurem.js"></script>
- ```
+Loblurem is a JavaScript plugin designed for generating blurry text effects. It was created by YILING CHEN and is distributed under the MIT License.
 
-## Configuration 參數配置：
-### 在需模糊的區域，加載屬性節點 data-loblurem，其屬性值可依使用者需求配置，其順序依次為 - > 字數(或自行輸文本)/字型大小/行間間距/字型顏色/字元間距/模糊程度預設為值4
-```
-  <p class="pq_TXT3" data-loblurem="157w/20/10/rgb(87, 132, 84)/5"> 歷經幾段感情之後遇見了他，我們一點都不速配，身高、年齡、收入...
-    <span>
-      <a data-loblurem-btn class="pq_BT_FREE1" href="#">立即測算</a>
-      <a data-loblurem-btn href="">付費後將提供本單元整頁分析內容</a>
-    </span>
-  </p>
-```
-### 模糊字渲染預設值為隨機，如需客製需增加自定義的文檔，範例如下：
-```
-  <div class="pq_RETEXT" data-loblurem="大弦嘈嘈如急雨，小弦切切如私語。嘈嘈切切錯雜彈，大珠小珠落玉盤。間關鶯語花底滑，幽咽泉流冰下難。冰泉冷澀弦疑絕，疑絕不通聲暫歇。別有幽愁暗恨生，此時無聲勝有聲。/20/10/#c93030/0"
-  </div>
-```
-![範例圖檔](/images/loblurem/examples1.png?raw=true "Title")
+## Table of Contents
 
-### 不適用大區塊段落文字模糊字定位，只適用標題，預設值為靠左，如需客製需增加 data-loblurem-display 屬性節點，和屬性值，範例如下：
-```
-  <div class="pq_TWO_COM">
-    <div class="pq_REPIC" data-loblurem="我反中，你怎樣/20/10/#c430c9/5" data-loblurem-display="right"></div>
-  </div>
-```
-* data-loblurem-display: left; (預設值)
-* data-loblurem-display: middle;
-* data-loblurem-display: right (不適用大區塊段落文字);
-  
-![範例圖檔](/images/loblurem/examples2.png?raw=true "Title")
-![範例圖檔](/images/loblurem/examples3.png?raw=true "Title")
+- [Usage](#usage)
+- [Options](#options)
+- [Initialization](#initialization)
+- [License](#license)
 
-### 模糊區段的按鈕可以多個並排，但需逐鍵增加data-loblurem-btn，並置中，範例如下：
+## Usage
+
+To use Loblurem, follow these steps:
+
+1. Include the Loblurem script in your HTML file:
+
+   ```html
+   <script src="path/to/es6.main.loblurem.bundle.js"></script>
+   ```
+2. Add the data-loblurem attribute to the HTML element where you want to apply the blurry text effect:
+   
+   ```html
+   <p class="pq_TXT3" data-loblurem="157w/20/10/rgb(87, 132, 84)/5"> 歷經幾段感情之後遇見了他，我們一點都不速配，身高、年齡、收入...
+      <span>
+         <a data-loblurem-btn class="pq_BT_FREE1" href="#">立即測算</a>
+         <a data-loblurem-btn href="">付費後將提供本單元整頁分析內容</a>
+      </span>
+   </p>
+   ```
+3. Add the data-loblurem-display attribute to the HTML element where you want to apply the position of the blurry text effect:
+   ```html
+   <p data-loblurem="前端測試中/40/10/#d39a15/5/7" data-loblurem-display="middle"></p>
+   ```
+
+4. Ensure the `Microsoft JhengHei` font is available in your project, as it is used for rendering the text.
+
+5. Loblurem will automatically apply the blurry text effect to the specified element when the page loads.
+
+
+## Options
+
+The `data-loblurem` attribute supports the following options:
+
+- **Counts**: Number of characters in the generated text.
+- **Contents**: Custom characters for the text (if not specified, random Chinese characters will be used).
+- **FontSize**: Font size of the text.
+- **LineHeight**: Line height of the text.
+- **Color**: Color of the text.
+- **LetterSpacing**: Letter spacing of the text.
+- **Blur**: Amount of blur applied to the text.
+
+Example:
+```html
+<div data-loblurem="counts/contents/fontSize/lineHeight/color/letterSpacing/blur" data-loblurem-display="..."></div>
 ```
-<p class="pq_TXT3" data-loblurem="貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！貼心提醒：盧恩石占卜過程皆為動畫，建議您在網路穩定的環境中操作， 以獲得最佳的占卜體驗與視覺效果唷！/20/10/rgb(87, 132, 84)/5">
-  <span>
-    <a data-loblurem-btn class="pq_BT_FREE1" href="#">1.立即測算</a>
-    <a data-loblurem-btn href="">2.付費後將提供</a>
-    <a data-loblurem-btn href="">3.本單元整頁</a>
-    <a data-loblurem-btn href="">4.分析內容</a>
-  </span>
-</p>
-```
-![範例圖檔](/images/loblurem/examples4.png?raw=true "Title")
+
+## Initialization
+
+Loblurem is initialized automatically when the DOM content is loaded. If you dynamically add elements with the data-loblurem attribute.
+
+## License
+
+Loblurem is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit/) for more details.
