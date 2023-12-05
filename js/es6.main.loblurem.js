@@ -1,6 +1,6 @@
 /*
  * ========================================================================
- * Loblurem 1.2
+ * Loblurem 1.2.1
  * Loblurem plugin for generating blurry text
  * YILING CHEN.
  * Copyright 2022, MIT License
@@ -11,6 +11,9 @@
 
 var self_lorem;
 class Loblurem {
+  static DEFAULT_THROTTLE_DELAY = 250;
+  static DEFAULT_BLUR = 4;
+  static DEFAULT_OFFSET_X = 2.5;
   charsPerSentence = [7, 8, 9, 10, 11, 12, 13];
   wordsSample = [
     '心', '戶', '手', '文', '斗', '斤', '方', '日', '月', '木', //4
@@ -32,7 +35,7 @@ class Loblurem {
   constructor(selector) {
     self_lorem = this;
     this.selector = selector;
-    this.resizeHandler = this.throttle(this.rendering.bind(this), 250);
+    this.resizeHandler = this.throttle(this.rendering.bind(this), Loblurem.DEFAULT_THROTTLE_DELAY);
     this.init();
   }
 
@@ -44,17 +47,19 @@ class Loblurem {
     return this.selector.getAttribute("data-loblurem-display");
   }
 
-  // 獲取選項設置
+  // Get option settings
   get options() {
     const attributes = this.selector.getAttribute("data-loblurem").split("/");
+    const parseInteger = (value, defaultValue) => Number.isInteger(parseInt(value)) ? parseInt(value) : defaultValue;
+
     return {
-      counts: Number.isInteger(parseInt(attributes[0])) ? parseInt(attributes[0]) : attributes[0].length,
-      contents: !Number.isInteger(parseInt(attributes[0])) ? attributes[0].split("") : [],
-      fontSize: parseInt(attributes[1]),
-      lineHeight: parseInt(attributes[2]),
+      counts: parseInteger(attributes[0], attributes[0].length),
+      contents: !Number.isInteger(parseInt(attributes[0])) ? attributes[0].split('') : [],
+      fontSize: parseInteger(attributes[1], 0),
+      lineHeight: parseInteger(attributes[2], 0),
       color: attributes[3],
-      letterSpacing: parseInt(attributes[4]),
-      blur: parseInt(typeof attributes[5] === "undefined" ? 4 : attributes[5]),
+      letterSpacing: parseInteger(attributes[4], 0),
+      blur: parseInteger(attributes[5], Loblurem.DEFAULT_BLUR),
     };
   }
 
@@ -70,12 +75,12 @@ class Loblurem {
     return this.options.fontSize + this.options.lineHeight;
   }
 
-  // 打亂數組
+  // Shuffle the array
   shuffleArray(arr) {
     return arr.sort(() => Math.random() - 0.5);
   }
 
-  // 生成句子的字數
+  // Generate the number of words in the sentence
   generateCounts(counts) {
     const charsPerSentence = [...this.charsPerSentence];
     let perSentenceChars = [];
@@ -102,7 +107,7 @@ class Loblurem {
     return perSentenceChars;
   }
 
-  // 對文本進行排序
+  // Sort the text
   sortText() {
     let charsPerSentence = this.shuffleArray(this.generateCounts(this.options.counts));
     let marks = this.shuffleArray(this.marks);
@@ -118,14 +123,14 @@ class Loblurem {
     }
 
     charsPerSentence = charsPerSentence.flat();
-    this.selector.setAttribute("data-loblurem", `${charsPerSentence.join("")}/${this.options.fontSize}/${this.options.lineHeight}/${this.options.color}/${this.options.letterSpacing}/${this.options.blur}`);
+    this.selector.setAttribute("data-loblurem", `${charsPerSentence.join('')}/${this.options.fontSize}/${this.options.lineHeight}/${this.options.color}/${this.options.letterSpacing}/${this.options.blur}`);
     charsPerSentence = charsPerSentence.map((_, i, a) => a.slice(i * this.charsPerRow, i * this.charsPerRow + this.charsPerRow)).filter(c => c.length);
 
     return charsPerSentence;
   }
 
   generateSVGContent() {
-    let rowsTemplate = "";
+    let rowsTemplate = '';
     let offsetX = this.getOffsetX();
     let rows = this.sortText();
     let svgHeight = this.lineHeight * rows.length;
@@ -133,11 +138,11 @@ class Loblurem {
     rows.forEach((c, i, a) => {
       if (i === a.length - 1) {
         rowsTemplate += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join('')}</text>
         `;
       } else {
         rowsTemplate += `
-        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join("")}</text>
+        <text kerning="auto" font-family="Microsoft JhengHei" filter="url(#drop-shadow${this.id})" font-size="${this.options.fontSize}px" x="${offsetX}px" y="${this.lineHeight * (i + 1) - 2}px" letter-spacing="${this.options.letterSpacing}px" textLength="${this.svgWidth}" font-size="${this.options.fontSize}px" fill="${this.options.color}">${c.join('')}</text>
         `;
       }
     });
@@ -155,18 +160,24 @@ class Loblurem {
 
     switch (this.getDisplay) {
       case "middle":
-        offsetX = this.svgWidth / 2 - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) / 2;
+        offsetX = this.calculateMiddleOffsetX();
         break;
       case "right":
-        offsetX = this.svgWidth - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) - 3;
+        offsetX = this.calculateRightOffsetX();
         break;
       default:
-        offsetX = 2.5;
+        offsetX = Loblurem.DEFAULT_OFFSET_X;
     }
 
     return offsetX;
   }
+  calculateMiddleOffsetX() {
+    return this.svgWidth / 2 - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) / 2;
+  }
 
+  calculateRightOffsetX() {
+    return this.svgWidth - (this.options.fontSize * this.options.counts + this.options.letterSpacing * (this.options.counts - 1)) - 3;
+  }
   centreBtn() {
     if (!this.buttons.length) return;
 
@@ -186,7 +197,7 @@ class Loblurem {
     });
   }
 
-  throttle(fn, delay = 250) {
+  throttle(fn, delay = Loblurem.DEFAULT_THROTTLE_DELAY) {
     let timer = 0;
 
     return () => {
@@ -198,28 +209,31 @@ class Loblurem {
       }
     };
   }
-  // 初始化方法
-  init(){
+  //Initialization
+  init() {
     this.selector.style.userSelect = this.selector.style.MozUserSelect = this.selector.style.WebkitUserSelect = this.selector.style.MsUserSelect = "none";
 
     this.rendering();
     this.resize();
   }
-  // 繪製內容
+  // draw content
   rendering() {
     this.selector.innerHTML += this.generateSVGContent();
     this.centreBtn();
   }
 
-  // 視窗大小改變偵測
+  // Window size change detection
   resize() {
-    window.addEventListener("resize", this.throttle(() => {
+    const handleWindowEvent = () => {
       if (this.selector.lastElementChild) {
         this.selector.lastElementChild.remove();
         this.selector.innerHTML += this.generateSVGContent();
         this.centreBtn();
       }
-    }));
+    };
+
+    window.addEventListener("resize", this.throttle(handleWindowEvent));
+    window.addEventListener("scroll", this.throttle(handleWindowEvent));
   }
 }
 
