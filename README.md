@@ -1,64 +1,100 @@
-# Loblurem 1.2.1
+# Loblurem 2.0.0
 
-Loblurem is a JavaScript plugin designed for generating blurry text effects. It was created by YILING CHEN and is distributed under the MIT License.
+Loblurem 是一個用於生成模糊文字效果的 JavaScript 套件。它支援自訂文字內容、字體大小、行高、顏色和模糊程度等特性，並提供了文字對齊方式的控制。
 
-## Table of Contents
+## 功能特點
 
-- [Usage](#usage)
-- [Options](#options)
-- [Initialization](#initialization)
-- [License](#license)
+- 支援自訂文字內容和隨機中文字元生成
+- 自適應容器寬度，自動換行
+- 支援靠左、置中和靠右對齊
+- 可自訂字體大小、行高、字距
+- 支援自訂文字顏色和模糊效果
+- 響應式設計，支援視窗大小變化
+- 支援 Microsoft JhengHei 字體
 
-## Usage
+## 安裝
 
-To use Loblurem, follow these steps:
+將編譯後的檔案引入您的 HTML：
 
-1. Include the Loblurem script in your HTML file:
-
-   ```html
-   <script src="path/to/es6.main.loblurem.bundle.js"></script>
-   ```
-2. Add the data-loblurem attribute to the HTML element where you want to apply the blurry text effect:
-   
-   ```html
-   <p class="pq_TXT3" data-loblurem="157w/20/10/rgb(87, 132, 84)/5"> 歷經幾段感情之後遇見了他，我們一點都不速配，身高、年齡、收入...
-      <span>
-         <a data-loblurem-btn class="pq_BT_FREE1" href="#">立即測算</a>
-         <a data-loblurem-btn href="">付費後將提供本單元整頁分析內容</a>
-      </span>
-   </p>
-   ```
-3. Add the data-loblurem-display attribute to the HTML element where you want to apply the position of the blurry text effect:
-   ```html
-   <p data-loblurem="前端測試中/40/10/#d39a15/5/7" data-loblurem-display="middle"></p>
-   ```
-
-4. Ensure the `Microsoft JhengHei` font is available in your project, as it is used for rendering the text.
-
-5. Loblurem will automatically apply the blurry text effect to the specified element when the page loads.
-
-
-## Options
-
-The `data-loblurem` attribute supports the following options:
-
-- **Counts**: Number of characters in the generated text.
-- **Contents**: Custom characters for the text (if not specified, random Chinese characters will be used).
-- **FontSize**: Font size of the text.
-- **LineHeight**: Line height of the text.
-- **Color**: Color of the text.
-- **LetterSpacing**: Letter spacing of the text.
-- **Blur**: Amount of blur applied to the text.
-
-Example:
 ```html
-<div data-loblurem="counts/contents/fontSize/lineHeight/color/letterSpacing/blur" data-loblurem-display="..."></div>
+<script src="path/to/es6.main.loblurem.bundle2.0.0.js"></script>
 ```
 
-## Initialization
+## 使用方法
 
-Loblurem is initialized automatically when the DOM content is loaded. If you dynamically add elements with the data-loblurem attribute.
+### 基本用法
 
-## License
+1. 添加 data-loblurem 屬性到 HTML 元素：
 
-Loblurem is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit/) for more details.
+```html
+<div data-loblurem="157w/20/10/rgb(87, 132, 84)/5"></div>
+```
+
+2. 添加 data-loblurem-display 屬性控制對齊方式：
+
+```html
+<div data-loblurem="測試文字/20/10/#000000/5" data-loblurem-display="right"></div>
+```
+
+### data-loblurem 屬性參數
+
+屬性值使用斜線(/)分隔，按順序包含以下參數：
+
+1. `content/counts`: 文字內容或字數（如：`"測試文字"` 或 `"157w"`）
+2. `fontSize`: 字體大小（單位：像素）
+3. `lineHeight`: 行高
+4. `color`: 文字顏色（支援 RGB、十六進位等格式）
+5. `letterSpacing`: 字距
+6. `blur`: 模糊程度（可選）
+
+### data-loblurem-display 屬性值
+
+- `left`: 靠左對齊（預設）
+- `middle`: 置中對齊
+- `right`: 靠右對齊
+
+### 範例
+
+```html
+<!-- 靠右對齊範例 -->
+<div data-loblurem="我是測試文字/20/10/#000000/5" data-loblurem-display="right"></div>
+
+<!-- 置中對齊範例 -->
+<div data-loblurem="157w/20/10/rgb(87, 132, 84)/5" data-loblurem-display="middle"></div>
+
+<!-- 帶按鈕的範例 -->
+<p class="pq_TXT3" data-loblurem="157w/20/10/rgb(87, 132, 84)/5">
+    文字內容...
+    <span>
+        <a data-loblurem-btn class="pq_BT_FREE1" href="#">按鈕文字</a>
+    </span>
+</p>
+```
+
+## 瀏覽器支援
+
+- Chrome (最新版本)
+- Firefox (最新版本)
+- Safari (最新版本)
+- Edge (最新版本)
+
+## 相依性
+
+- 需要 Microsoft JhengHei 字體支援
+
+## 授權條款
+
+MIT License
+
+## 更新日誌
+
+### 2.0.0
+- 使用 ES2024 特性重構
+- 新增文字對齊功能
+- 優化效能和程式碼結構
+- 改進錯誤處理
+- 新增事件支援
+- 優化字體載入機制
+
+### 1.2.1
+- 初始版本發布

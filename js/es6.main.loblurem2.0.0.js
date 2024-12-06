@@ -18,7 +18,6 @@ class Loblurem extends EventTarget {
     #updateSVG;
     #render;
     #init;
-    #renderContent;
     #validateSelector;
     #parseOptions;
     #loadFonts;
@@ -109,10 +108,36 @@ class Loblurem extends EventTarget {
         };
 
         this.#generateContent = () => {
-            // 隨機打亂字符數組
+            // 如果 options.contents 有值，直接使用該內容
+            if (this.#options.contents.length > 0) {
+                const result = [];
+                let currentIndex = 0;
+                let currentSentence = [];
+                
+                // 遍歷內容，按原有標點符號分段
+                for (const char of this.#options.contents) {
+                    currentSentence.push(char);
+                    
+                    // 如果遇到標點符號，保存當前句子
+                    if (this.#marks.includes(char)) {
+                        result.push(...currentSentence);
+                        currentSentence = [];
+                    }
+                }
+                
+                // 处理最后一个句子（如果没有以标点符号结尾）
+                if (currentSentence.length > 0) {
+                    result.push(...currentSentence);
+                }
+                
+                return result;
+            }
+            
+            // 如果没有预设内容，则生成随机内容
             const shuffled = [...this.#wordsSample].sort(() => Math.random() - 0.5);
             const result = [];
             let currentIndex = 0;
+            let previousSentence = null;
 
             // 根據 charsPerSentence 切分文字區塊
             while (currentIndex < this.#options.counts) {
@@ -126,31 +151,39 @@ class Loblurem extends EventTarget {
                 
                 // 處理最後一個區塊
                 if (remainingCount <= sentenceLength) {
-                    // 計算需要補充的字數（扣除句號）
-                    const neededChars = sentenceLength - remainingCount;
-                    
-                    // 取得當前句子的文字
+                    // 取得當前句子的文
                     const sentence = shuffled.slice(currentIndex, currentIndex + remainingCount);
                     
-                    // 補充字數
-                    if (neededChars > 0) {
-                        sentence.push(...shuffled.slice(0, neededChars));
+                    // 如果最後區塊字數小於7且有前一個句子，合併到前一個句子
+                    if (sentence.length < 7 && result.length > 0) {
+                        // 移除前一個句��的標點符號
+                        result.pop();
+                        result.push(...sentence);
+                        // 添加句號結尾
+                        result.push('。');
+                    } else {
+                        result.push(...sentence, '。');
                     }
-                    
-                    // 添加句號
-                    sentence.push('。');
-                    result.push(...sentence);
                     break;
                 }
 
                 // 取得當前句子的文字
                 const sentence = shuffled.slice(currentIndex, currentIndex + sentenceLength);
                 
-                // 添加標點符號（逗號或頓號）
-                sentence.push(Math.random() < 0.5 ? '，' : '、');
+                // 如果當前句子字數小於7且不是第一個句子，與前一句合併
+                if (sentence.length < 7 && result.length > 0) {
+                    // 移除前一個句子的標點符號
+                    result.pop();
+                    result.push(...sentence);
+                    // 添加隨機標點符號
+                    const randomMark = this.#marks[Math.floor(Math.random() * this.#marks.length)];
+                    result.push(randomMark);
+                } else {
+                    // 正常處理句子
+                    const randomMark = this.#marks[Math.floor(Math.random() * this.#marks.length)];
+                    result.push(...sentence, randomMark);
+                }
                 
-                // 將句子加入結果
-                result.push(...sentence);
                 currentIndex += sentenceLength;
             }
 
@@ -193,7 +226,7 @@ class Loblurem extends EventTarget {
             return {svg, filterId, containerWidth};
         };
 
-        this.#appendContent = (svgData, content) => {
+        this.#appendContent = async (svgData, content) => {
             const {svg, filterId} = svgData;
             
             // 計算每行可容納的字符數
@@ -201,64 +234,146 @@ class Loblurem extends EventTarget {
             const charWidth = this.#options.fontSize + this.#options.letterSpacing;
             const charsPerRow = Math.floor((containerWidth - 10) / charWidth);
             
-            // 將內容分行
-            const lines = [];
-            for (let i = 0; i < content.length; i += charsPerRow) {
-                lines.push(content.slice(i, i + charsPerRow));
-            }
+            // 获取对齐方式 - 移到 Promise 外部
+            const displayAlign = this.#selector.getAttribute('data-loblurem-display') || 'left';
             
-            // 為每一行創建文字元素
-            lines.forEach((line, index) => {
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                
-                // 基本屬性設置
-                text.setAttribute('kerning', 'auto');
-                text.setAttribute('font-family', 'Microsoft JhengHei');
-                text.setAttribute('filter', `url(#${filterId})`);
-                text.setAttribute('font-size', `${this.#options.fontSize}px`);
-                text.setAttribute('letter-spacing', `${this.#options.letterSpacing}px`);
-                text.setAttribute('fill', this.#options.color);
-                
-                // 計算Y軸位置
-                const y = (this.#options.fontSize + this.#options.lineHeight) * (index + 1) - 2;
-                text.setAttribute('x', `${Loblurem.#DEFAULT_OFFSET_X}px`);
-                text.setAttribute('y', `${y}px`);
-                
-                // 設置文字長度和對齊
-                const isLastLine = index === lines.length - 1;
-                if (!isLastLine) {
-                    text.setAttribute('textLength', `${containerWidth - 10}px`);
-                    text.setAttribute('lengthAdjust', 'spacing');
+            // 将内容分行
+            const lines = [];
+            let currentLine = [];
+            let currentLength = 0;
+
+            return new Promise((resolve, reject) => {
+                try {
+                    // 分行處理
+                    for (let i = 0; i < content.length; i++) {
+                        const char = content[i];
+                        
+                        // 檢查是否達到行寬限制
+                        if (currentLength >= charsPerRow) {
+                            lines.push([...currentLine]);
+                            currentLine = [];
+                            currentLength = 0;
+                        }
+                        
+                        currentLine.push(char);
+                        currentLength++;
+                    }
+                    
+                    // 處理最後一行
+                    if (currentLine.length > 0) {
+                        lines.push(currentLine);
+                    }
+                    
+                    // 為每一行創建文字元素
+                    lines.forEach((line, index) => {
+                        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        
+                        // 基本屬性設置
+                        text.setAttribute('kerning', 'auto');
+                        text.setAttribute('font-family', 'Microsoft JhengHei');
+                        text.setAttribute('filter', `url(#${filterId})`);
+                        text.setAttribute('font-size', `${this.#options.fontSize}px`);
+                        text.setAttribute('letter-spacing', `${this.#options.letterSpacing}px`);
+                        text.setAttribute('fill', this.#options.color);
+                        
+                        // 計算Y軸位置
+                        const y = (this.#options.fontSize + this.#options.lineHeight) * (index + 1) - 2;
+                        
+                        // 根据对齐方式设置x坐标
+                        let x = Loblurem.#DEFAULT_OFFSET_X;
+                        switch (displayAlign) {
+                            case 'right':
+                                // 计算右对齐位置
+                                const lineWidth = line.length * (this.#options.fontSize + this.#options.letterSpacing);
+                                x = containerWidth - lineWidth - Loblurem.#DEFAULT_OFFSET_X;
+                                break;
+                            case 'middle':
+                                // 计算居中对齐位置
+                                const middleWidth = line.length * (this.#options.fontSize + this.#options.letterSpacing);
+                                x = (containerWidth - middleWidth) / 2;
+                                break;
+                            default:
+                                // 左對齊，使用默認值
+                                break;
+                        }
+                        
+                        text.setAttribute('x', `${x}px`);
+                        text.setAttribute('y', `${y}px`);
+                        
+                        // 只有非最後一行且不含標點符號的行才進行長度調整
+                        const isLastLine = index === lines.length - 1;
+                        const containsPunctuation = line.some(char => this.#marks.includes(char));
+                        
+                        if (!isLastLine && !containsPunctuation && displayAlign === 'left') {
+                            text.setAttribute('textLength', `${containerWidth - 10}px`);
+                            text.setAttribute('lengthAdjust', 'spacing');
+                        }
+                        
+                        text.textContent = line.join('');
+                        svg.appendChild(text);
+                    });
+
+                    // 確保所有文字元素都已添加到 SVG 中
+                    requestAnimationFrame(() => {
+                        resolve(svg);
+                    });
+                } catch (error) {
+                    reject(error);
                 }
-                
-                text.textContent = line.join('');
-                svg.appendChild(text);
             });
         };
 
         this.#init = async () => {
             try {
+                // 設置選擇器樣式
+                this.#selector.style.userSelect = 'none';
+                this.#selector.style.MozUserSelect = 'none';
+                this.#selector.style.WebkitUserSelect = 'none';
+                this.#selector.style.MsUserSelect = 'none';
+                
+                // 等待字體加載和初始化完成
                 await this.#loadFonts();
-                await this.#renderContent();
+                await this.#initResizeObserver();
+                
+                // 執行首次渲染
+                await this.#render();
+                
+                // 觸發準備完成事件
                 this.dispatchEvent(new CustomEvent('ready'));
             } catch (error) {
                 this.dispatchEvent(new CustomEvent('error', { detail: error }));
+                throw error;
             }
         };
 
-        this.#render = () => {
-            // 如果沒有緩存的內容，生成新的內容
-            if (!this.#cachedContent) {
-                this.#cachedContent = this.#generateContent();
+        this.#render = async () => {
+            try {
+                // 如果沒有緩存的內容，生成新的內容
+                if (!this.#cachedContent) {
+                    this.#cachedContent = this.#generateContent();
+                }
+                
+                // 創建 SVG 元素
+                const svgData = this.#createSVGElement();
+                
+                // 等待字體加載完成
+                await this.#loadFonts();
+                
+                // 渲染內容
+                await this.#appendContent(svgData, this.#cachedContent);
+                
+                // 更新 DOM
+                this.#selector.innerHTML = '';
+                this.#selector.appendChild(svgData.svg);
+                
+                // 觸發渲染完成事件
+                this.dispatchEvent(new CustomEvent('rendered'));
+                
+                return svgData.svg;
+            } catch (error) {
+                this.dispatchEvent(new CustomEvent('error', { detail: error }));
+                throw error;
             }
-            
-            // 清除舊的內容
-            const svgData = this.#createSVGElement();
-            this.#appendContent(svgData, this.#cachedContent);
-            
-            // 更新 DOM
-            this.#selector.innerHTML = '';
-            this.#selector.appendChild(svgData.svg);
         };
 
         this.#updateSVG = (contentRect = null) => {
@@ -268,18 +383,13 @@ class Loblurem extends EventTarget {
             this.#render();
         };
         
-        this.#renderContent = async () => {
-            await this.#render();
-            this.dispatchEvent(new CustomEvent('rendered'));
-        };
-        
         // 初始化實例
         this.#validateSelector(selector);
         this.#selector = selector;
         this.#options = this.#parseOptions(options);
         this.#instances.set(selector, this);
         
-        // 啟動初始化
+        // 啟動初化
         this.#initResizeObserver();
         this.#init();
     }
@@ -323,23 +433,23 @@ class Loblurem extends EventTarget {
 }
 
 // 修改導出部分
-(function(global) {
+if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-        // CommonJS 導出
-        module.exports = Loblurem;
-    } else if (typeof define === 'function' && define.amd) {
-        // AMD 導出
-        define([], function() {
-            return Loblurem;
-        });
-    } else {
-        // 瀏覽器全局導出
-        global.Loblurem = Loblurem;
-        
-        // 自動初始化所有 Loblurem 實例
-        global.addEventListener("DOMContentLoaded", function () {
-            const selectors = document.querySelectorAll("[data-loblurem]");
-            selectors.forEach(selector => new Loblurem(selector));
-        });
+        exports = module.exports = Loblurem;
     }
-})(typeof window !== 'undefined' ? window : this);
+    exports.Loblurem = Loblurem;
+} else if (typeof define === 'function' && define.amd) {
+    define('Loblurem', [], function() {
+        return Loblurem;
+    });
+} else {
+    window.Loblurem = Loblurem;
+}
+
+// 自動初始化
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('[data-loblurem]');
+        elements.forEach(element => new Loblurem(element));
+    });
+}
